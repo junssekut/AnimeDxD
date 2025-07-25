@@ -13,4 +13,23 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Login Theme -->
+    <style name="Theme.AnimeDXD.Login" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/golden_yellow</item>
+        <item name="colorPrimaryVariant">@color/golden_yellow</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Custom TextInputLayout Style -->
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/gray_light</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="hintTextColor">@color/gray_light</item>
+        <item name="android:textColorHint">@color/gray_light</item>
+        <item name="boxBackgroundColor">@color/input_background</item>
+    </style>
 </resources>

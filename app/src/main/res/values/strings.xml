@@ -3,4 +3,23 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Home Page Strings -->
+    <string name="welcome_title">WELCOME.</string>
+    <string name="welcome_description">Discover the latest anime news, trending manga, and your favorite characters, all in one place. Stay updated, explore, and dive into the world of anime like never before.</string>
+    <string name="news_tab">NEWS</string>
+    <string name="manga_tab">MANGA</string>
+    <string name="action_label">ACTION</string>
+    <string name="featured_title">Demon Chronicles: Ashes of War</string>
+    <string name="featured_subtitle">The Ultimate Quest</string>
+    <string name="featured_description">A forgotten warrior rises from the ruins to challenge the empire that betrayed him. Will vengeance bring peace or destruction?</string>
+    <string name="weekly_top_3">WEEKLY TOP 3</string>
+    <string name="recent_news">RECENT NEWS</string>
+    <string name="latest_review">LATEST REVIEW</string>
+    <string name="posted_on">Posted on %s</string>
+    <string name="attack_on_titan">Attack On Titan</string>
+    <string name="demon_slayer">Demon Slayer</string>
+    <string name="share_this_review">Share this review</string>
+    <string name="menu_description">Menu</string>
+    <string name="featured_anime_description">Featured Anime</string>
 </resources>
