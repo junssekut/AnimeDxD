@@ -22,4 +22,8 @@
     <string name="share_this_review">Share this review</string>
     <string name="menu_description">Menu</string>
     <string name="featured_anime_description">Featured Anime</string>
+
+    <!-- Manga Tab Strings -->
+    <string name="popular_manga_updates">POPULAR MANGA UPDATES</string>
+    <string name="latest_manga_releases">LATEST MANGA RELEASES</string>
 </resources>

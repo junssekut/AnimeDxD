@@ -24,4 +24,5 @@
     <color name="accent_orange">#FF6B35</color>
     <color name="button_toggle">#666666</color>
     <color name="section_header">#FFD700</color>
+    <color name="tab_selected_yellow">#F9CB55</color>
 </resources>
