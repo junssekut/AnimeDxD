@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_marginBottom="24dp">
+
+    <!-- Left side: Anime image only -->
+    <ImageView
+        android:id="@+id/review_image"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/featured_anime" />
+
+    <!-- Right side: Review content -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/review_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Attack On Titan"
+            android:textColor="@color/golden_yellow"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/go3v2"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/review_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Attack On Titan"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/review_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="★★★★★"
+                android:textColor="@color/golden_yellow"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/review_description"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Whispers from the Abyss: A hilarious isekai parody packed with chaotic energy, ridiculous party dynamics, and laugh-out-loud moments. It's quirky characters—especially Kazuma and Aqua—turn every quest into a disaster in the best way possible. A perfect pick for when you want comedy and fun without taking things too seriously!"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:lineSpacingExtra="2dp"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/reply_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📝 Reply to this review"
+                android:textColor="@color/golden_yellow"
+                android:textSize="10sp"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="2dp" />
+
+            <TextView
+                android:id="@+id/share_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📤 Share this review"
+                android:textColor="@color/golden_yellow"
+                android:textSize="10sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="2dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

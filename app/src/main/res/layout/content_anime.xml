@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Featured Content Section (Anime Carousel) -->
+    <FrameLayout
+        android:id="@+id/featured_section"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="24dp">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/anime_carousel_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Left Navigation Button -->
+        <ImageButton
+            android:id="@+id/carousel_nav_left"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/carousel_nav_button_bg"
+            android:src="@drawable/ic_chevron_left"
+            android:contentDescription="Previous slide"
+            android:elevation="4dp" />
+
+        <!-- Right Navigation Button -->
+        <ImageButton
+            android:id="@+id/carousel_nav_right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/carousel_nav_button_bg"
+            android:src="@drawable/ic_chevron_right"
+            android:contentDescription="Next slide"
+            android:elevation="4dp" />
+
+        <!-- Carousel Indicators -->
+        <LinearLayout
+            android:id="@+id/carousel_indicators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal" />
+
+    </FrameLayout>
+
+    <!-- Weekly Top 3 Section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/weekly_top_3"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/go3v2"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:id="@+id/weekly_top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Recent News Section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recent_news"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/go3v2"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recent_news_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="32dp"
+        android:nestedScrollingEnabled="true"
+        tools:listitem="@layout/item_recent_news" />
+
+    <!-- Latest Review Section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/latest_review"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/go3v2"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/latest_review_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_latest_review" />
+
+</LinearLayout>
