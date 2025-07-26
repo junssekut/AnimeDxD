@@ -151,6 +151,7 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginBottom="110dp"
                 android:background="@drawable/login_button_glow"
                 android:fontFamily="@font/go3v2"

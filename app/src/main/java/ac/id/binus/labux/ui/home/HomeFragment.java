@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.ArrayList;
@@ -85,32 +87,37 @@ public class HomeFragment extends Fragment {
         carouselAnimeList.add(new Anime("Chainsaw Man", "ACTION", "chainsaw_man", "chainsaw_man_wide"));
         carouselAnimeList.add(new Anime("Sword Art Online", "ADVENTURE", "sword_art_online", "sword_art_online_wide"));
 
+        // Get carousel elements from anime content layout
+        View animeContent = binding.animeContent.getRoot();
+        ViewPager2 carouselViewPager = animeContent.findViewById(R.id.anime_carousel_viewpager);
+        LinearLayout carouselIndicators = animeContent.findViewById(R.id.carousel_indicators);
+
         // Setup ViewPager2 with adapter
         carouselAdapter = new AnimeCarouselAdapter(getContext(), carouselAnimeList);
-        binding.animeCarouselViewpager.setAdapter(carouselAdapter);
+        carouselViewPager.setAdapter(carouselAdapter);
 
         // Setup indicators
-        setupCarouselIndicators();
+        setupCarouselIndicators(carouselIndicators);
 
         // Setup page change callback for updating indicators
-        binding.animeCarouselViewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        carouselViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 currentPage = position;
-                updateIndicators(position);
+                updateIndicators(position, carouselIndicators);
             }
         });
 
         // Setup navigation button click listeners
-        setupCarouselNavigation();
+        setupCarouselNavigation(animeContent, carouselViewPager);
 
         // Setup auto-scroll
-        setupAutoScroll();
+        setupAutoScroll(carouselViewPager);
     }
 
-    private void setupCarouselIndicators() {
-        binding.carouselIndicators.removeAllViews();
+    private void setupCarouselIndicators(LinearLayout carouselIndicators) {
+        carouselIndicators.removeAllViews();
 
         ImageView[] indicators = new ImageView[carouselAnimeList.size()];
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -123,13 +130,13 @@ public class HomeFragment extends Fragment {
             indicators[i].setImageDrawable(ContextCompat.getDrawable(getContext(),
                 i == 0 ? R.drawable.indicator_active : R.drawable.indicator_inactive));
             indicators[i].setLayoutParams(layoutParams);
-            binding.carouselIndicators.addView(indicators[i]);
+            carouselIndicators.addView(indicators[i]);
         }
     }
 
-    private void updateIndicators(int position) {
-        for (int i = 0; i < binding.carouselIndicators.getChildCount(); i++) {
-            ImageView indicator = (ImageView) binding.carouselIndicators.getChildAt(i);
+    private void updateIndicators(int position, LinearLayout carouselIndicators) {
+        for (int i = 0; i < carouselIndicators.getChildCount(); i++) {
+            ImageView indicator = (ImageView) carouselIndicators.getChildAt(i);
             if (i == position) {
                 indicator.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.indicator_active));
             } else {
@@ -138,14 +145,14 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void setupAutoScroll() {
+    private void setupAutoScroll(ViewPager2 carouselViewPager) {
         autoScrollHandler = new Handler(Looper.getMainLooper());
         autoScrollRunnable = new Runnable() {
             @Override
             public void run() {
                 if (carouselAnimeList != null && carouselAnimeList.size() > 0) {
                     currentPage = (currentPage + 1) % carouselAnimeList.size();
-                    binding.animeCarouselViewpager.setCurrentItem(currentPage, true);
+                    carouselViewPager.setCurrentItem(currentPage, true);
                     autoScrollHandler.postDelayed(this, 5000); // 5 seconds
                 }
             }
@@ -165,35 +172,23 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupRecyclerViews() {
-        // Setup Weekly Top 3 RecyclerView
-        LinearLayoutManager weeklyLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.weeklyTopRecyclerview.setLayoutManager(weeklyLayoutManager);
+        // Setup Anime Content RecyclerViews
+        setupAnimeContent();
 
-        // Setup Section 1 RecyclerView (News/Manga Updates)
-        LinearLayoutManager section1LayoutManager = new LinearLayoutManager(getContext());
-        binding.section1Recyclerview.setLayoutManager(section1LayoutManager);
+        // Setup Manga Content RecyclerViews
+        setupMangaContent();
+    }
 
-        // Setup Section 2 RecyclerView (Reviews/Manga Releases)
-        LinearLayoutManager section2LayoutManager = new LinearLayoutManager(getContext());
-        binding.section2Recyclerview.setLayoutManager(section2LayoutManager);
-
-        // Create sample data and set adapters
+    private void setupAnimeContent() {
+        // Setup Weekly Top Data
         setupWeeklyTopData();
-        setupRecentNewsData();
-        setupLatestReviewData();
-    }
 
-    private void setupWeeklyTopData() {
-        List<Anime> weeklyTopAnime = new ArrayList<>();
-        weeklyTopAnime.add(new Anime("Shingeki No Kyojin", "ACTION", "shingeki_no_kyojin", "shingeki_no_kyojin_wide"));
-        weeklyTopAnime.add(new Anime("Kimetsu No Yaiba", "ACTION", "kimetsu_no_yaiba", "kimetsu_no_yaiba_wide"));
-        weeklyTopAnime.add(new Anime("Tokyo Ghoul", "DARK FANTASY", "tokyo_ghoul", "tokyo_ghoul_wide"));
+        // Setup Recent News RecyclerView
+        View animeContent = binding.animeContent.getRoot();
+        RecyclerView recentNewsRecyclerView = animeContent.findViewById(R.id.recent_news_recyclerview);
+        LinearLayoutManager newsLayoutManager = new LinearLayoutManager(getContext());
+        recentNewsRecyclerView.setLayoutManager(newsLayoutManager);
 
-        WeeklyTopAdapter weeklyAdapter = new WeeklyTopAdapter(getContext(), weeklyTopAnime);
-        binding.weeklyTopRecyclerview.setAdapter(weeklyAdapter);
-    }
-
-    private void setupRecentNewsData() {
         List<News> recentNews = new ArrayList<>();
         recentNews.add(new News(
             "Attack On Titan",
@@ -227,10 +222,13 @@ public class HomeFragment extends Fragment {
         ));
 
         RecentNewsAdapter newsAdapter = new RecentNewsAdapter(getContext(), recentNews);
-        binding.section1Recyclerview.setAdapter(newsAdapter);
-    }
+        recentNewsRecyclerView.setAdapter(newsAdapter);
 
-    private void setupLatestReviewData() {
+        // Setup Latest Review RecyclerView
+        RecyclerView latestReviewRecyclerView = animeContent.findViewById(R.id.latest_review_recyclerview);
+        LinearLayoutManager reviewLayoutManager = new LinearLayoutManager(getContext());
+        latestReviewRecyclerView.setLayoutManager(reviewLayoutManager);
+
         List<Review> latestReviews = new ArrayList<>();
         latestReviews.add(new Review(
             "Shingeki No Kyojin",
@@ -248,72 +246,17 @@ public class HomeFragment extends Fragment {
         ));
 
         LatestReviewAdapter reviewAdapter = new LatestReviewAdapter(getContext(), latestReviews);
-        binding.section2Recyclerview.setAdapter(reviewAdapter);
+        latestReviewRecyclerView.setAdapter(reviewAdapter);
     }
 
-    private void setupTabSwitching() {
-        binding.newsTab.setOnClickListener(v -> {
-            // Switch to news tab
-            binding.newsTab.setBackgroundResource(R.drawable.tab_selected_yellow);
-            binding.newsTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.background_dark));
-            binding.mangaTab.setBackground(null);
-            binding.mangaTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary));
+    private void setupMangaContent() {
+        View mangaContent = binding.mangaContent.getRoot();
 
-            isMangaTabSelected = false;
-            loadAnimeContent();
-        });
+        // Setup Manga Updates RecyclerView
+        RecyclerView mangaUpdatesRecyclerView = mangaContent.findViewById(R.id.manga_updates_recyclerview);
+        LinearLayoutManager mangaUpdateLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mangaUpdatesRecyclerView.setLayoutManager(mangaUpdateLayoutManager);
 
-        binding.mangaTab.setOnClickListener(v -> {
-            // Switch to manga tab
-            binding.mangaTab.setBackgroundResource(R.drawable.tab_selected_yellow);
-            binding.mangaTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.background_dark));
-            binding.newsTab.setBackground(null);
-            binding.newsTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary));
-
-            isMangaTabSelected = true;
-            loadMangaContent();
-        });
-    }
-
-    private void loadAnimeContent() {
-        // Show anime sections
-        binding.featuredSection.setVisibility(View.VISIBLE);
-        binding.mangaCarousel.getRoot().setVisibility(View.GONE);
-        binding.weeklyTopTitle.setVisibility(View.VISIBLE);
-        binding.weeklyTopRecyclerview.setVisibility(View.VISIBLE);
-
-        // Update section titles
-        binding.section1Title.setText(R.string.recent_news);
-        binding.section2Title.setText(R.string.latest_review);
-
-        // Setup anime data
-        setupRecentNewsData();
-        setupLatestReviewData();
-
-        // Start auto-scroll for carousel
-        startAutoScroll();
-    }
-
-    private void loadMangaContent() {
-        // Hide anime sections, show manga sections
-        binding.featuredSection.setVisibility(View.GONE);
-        binding.mangaCarousel.getRoot().setVisibility(View.VISIBLE);
-        binding.weeklyTopTitle.setVisibility(View.GONE);
-        binding.weeklyTopRecyclerview.setVisibility(View.GONE);
-
-        // Update section titles for manga
-        binding.section1Title.setText(R.string.popular_manga_updates);
-        binding.section2Title.setText(R.string.latest_manga_releases);
-
-        // Setup manga data
-        setupPopularMangaUpdatesData();
-        setupLatestMangaReleasesData();
-
-        // Stop auto-scroll when in manga mode
-        stopAutoScroll();
-    }
-
-    private void setupPopularMangaUpdatesData() {
         List<MangaUpdate> mangaUpdates = new ArrayList<>();
         mangaUpdates.add(new MangaUpdate(
             "Tensei Shitara Slime Datta",
@@ -334,19 +277,14 @@ public class HomeFragment extends Fragment {
             "Ch.97"
         ));
 
-        // Setup RecyclerView with horizontal layout for manga updates
-        LinearLayoutManager mangaUpdateLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.section1Recyclerview.setLayoutManager(mangaUpdateLayoutManager);
-        binding.section1Recyclerview.setLayoutParams(new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-
         MangaUpdateAdapter mangaUpdateAdapter = new MangaUpdateAdapter(getContext(), mangaUpdates);
-        binding.section1Recyclerview.setAdapter(mangaUpdateAdapter);
-    }
+        mangaUpdatesRecyclerView.setAdapter(mangaUpdateAdapter);
 
-    private void setupLatestMangaReleasesData() {
+        // Setup Manga Releases RecyclerView
+        RecyclerView mangaReleasesRecyclerView = mangaContent.findViewById(R.id.manga_releases_recyclerview);
+        LinearLayoutManager mangaReleaseLayoutManager = new LinearLayoutManager(getContext());
+        mangaReleasesRecyclerView.setLayoutManager(mangaReleaseLayoutManager);
+
         List<MangaRelease> mangaReleases = new ArrayList<>();
         mangaReleases.add(new MangaRelease(
             "Attack On Titan",
@@ -368,44 +306,96 @@ public class HomeFragment extends Fragment {
         ));
 
         MangaReleaseAdapter mangaReleaseAdapter = new MangaReleaseAdapter(getContext(), mangaReleases);
-        binding.section2Recyclerview.setAdapter(mangaReleaseAdapter);
+        mangaReleasesRecyclerView.setAdapter(mangaReleaseAdapter);
     }
 
-    private void setupCarouselNavigation() {
-        binding.carouselNavLeft.setOnClickListener(v -> {
-            int currentItem = binding.animeCarouselViewpager.getCurrentItem();
-            int previousItem;
+    private void setupWeeklyTopData() {
+        List<Anime> weeklyTopAnime = new ArrayList<>();
+        weeklyTopAnime.add(new Anime("Shingeki No Kyojin", "ACTION", "shingeki_no_kyojin", "shingeki_no_kyojin_wide"));
+        weeklyTopAnime.add(new Anime("Kimetsu No Yaiba", "ACTION", "kimetsu_no_yaiba", "kimetsu_no_yaiba_wide"));
+        weeklyTopAnime.add(new Anime("Tokyo Ghoul", "DARK FANTASY", "tokyo_ghoul", "tokyo_ghoul_wide"));
 
-            if (currentItem == 0) {
-                // Wrap to last item
-                previousItem = carouselAnimeList.size() - 1;
-            } else {
-                previousItem = currentItem - 1;
+        // Get the weekly top container from anime content
+        View animeContent = binding.animeContent.getRoot();
+        LinearLayout weeklyTopContainer = animeContent.findViewById(R.id.weekly_top_container);
+        weeklyTopContainer.removeAllViews();
+
+        // Add each card manually to the LinearLayout
+        for (Anime anime : weeklyTopAnime) {
+            View cardView = getLayoutInflater().inflate(R.layout.item_weekly_top, weeklyTopContainer, false);
+
+            // Set up the card data
+            ImageView animeImage = cardView.findViewById(R.id.anime_image);
+            TextView animeTitle = cardView.findViewById(R.id.anime_title);
+            TextView animeGenre = cardView.findViewById(R.id.anime_genre);
+            TextView animeReviews = cardView.findViewById(R.id.anime_reviews);
+            TextView animeWatchingCount = cardView.findViewById(R.id.anime_watching_count);
+            TextView animeEpisodesCount = cardView.findViewById(R.id.anime_episodes_count);
+
+            // Load image
+            int imageResId = getContext().getResources().getIdentifier(anime.getImageResource(), "drawable", getContext().getPackageName());
+            if (imageResId != 0) {
+                animeImage.setImageResource(imageResId);
             }
 
-            binding.animeCarouselViewpager.setCurrentItem(previousItem, true);
+            // Set text data
+            animeTitle.setText(anime.getTitle());
+            animeGenre.setText(anime.getGenre());
+            animeReviews.setText("(1200 reviews)");
+            animeWatchingCount.setText("3200");
+            animeEpisodesCount.setText("25");
 
-            // Reset auto-scroll timer when user manually navigates
-            startAutoScroll();
+            // Add to container
+            weeklyTopContainer.addView(cardView);
+        }
+    }
+
+    private void setupTabSwitching() {
+        binding.newsTab.setOnClickListener(v -> {
+            // Switch to news tab - golden background with white text
+            binding.newsTab.setBackgroundResource(R.drawable.tab_selected_yellow);
+            binding.newsTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+
+            // Reset manga tab - no background with secondary text color
+            binding.mangaTab.setBackground(null);
+            binding.mangaTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary));
+
+            isMangaTabSelected = false;
+            loadAnimeContent();
         });
 
-        binding.carouselNavRight.setOnClickListener(v -> {
-            int currentItem = binding.animeCarouselViewpager.getCurrentItem();
-            int nextItem;
+        binding.mangaTab.setOnClickListener(v -> {
+            // Switch to manga tab - golden background with white text
+            binding.mangaTab.setBackgroundResource(R.drawable.tab_selected_yellow);
+            binding.mangaTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
 
-            if (currentItem == carouselAnimeList.size() - 1) {
-                // Wrap to first item
-                nextItem = 0;
-            } else {
-                nextItem = currentItem + 1;
-            }
+            // Reset news tab - no background with secondary text color
+            binding.newsTab.setBackground(null);
+            binding.newsTab.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary));
 
-            binding.animeCarouselViewpager.setCurrentItem(nextItem, true);
-
-            // Reset auto-scroll timer when user manually navigates
-            startAutoScroll();
+            isMangaTabSelected = true;
+            loadMangaContent();
         });
     }
+
+    private void loadAnimeContent() {
+        // Show anime content, hide manga content
+        binding.animeContent.getRoot().setVisibility(View.VISIBLE);
+        binding.mangaContent.getRoot().setVisibility(View.GONE);
+
+        // Start auto-scroll for carousel
+        startAutoScroll();
+    }
+
+    private void loadMangaContent() {
+        // Hide anime content, show manga content
+        binding.animeContent.getRoot().setVisibility(View.GONE);
+        binding.mangaContent.getRoot().setVisibility(View.VISIBLE);
+
+        // Stop auto-scroll when in manga mode
+        stopAutoScroll();
+    }
+
 
     private void setupMenuDropdown() {
         binding.menuIcon.setOnClickListener(v -> showDropdownMenu(v));
@@ -456,6 +446,45 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
             getActivity().finish();
         }
+    }
+
+    private void setupCarouselNavigation(View animeContent, ViewPager2 carouselViewPager) {
+        ImageView carouselNavLeft = animeContent.findViewById(R.id.carousel_nav_left);
+        ImageView carouselNavRight = animeContent.findViewById(R.id.carousel_nav_right);
+
+        carouselNavLeft.setOnClickListener(v -> {
+            int currentItem = carouselViewPager.getCurrentItem();
+            int previousItem;
+
+            if (currentItem == 0) {
+                // Wrap to last item
+                previousItem = carouselAnimeList.size() - 1;
+            } else {
+                previousItem = currentItem - 1;
+            }
+
+            carouselViewPager.setCurrentItem(previousItem, true);
+
+            // Reset auto-scroll timer when user manually navigates
+            startAutoScroll();
+        });
+
+        carouselNavRight.setOnClickListener(v -> {
+            int currentItem = carouselViewPager.getCurrentItem();
+            int nextItem;
+
+            if (currentItem == carouselAnimeList.size() - 1) {
+                // Wrap to first item
+                nextItem = 0;
+            } else {
+                nextItem = currentItem + 1;
+            }
+
+            carouselViewPager.setCurrentItem(nextItem, true);
+
+            // Reset auto-scroll timer when user manually navigates
+            startAutoScroll();
+        });
     }
 
     @Override

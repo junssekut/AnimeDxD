@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="35px"
-        android:paddingTop="50px">
+        android:paddingHorizontal="35dp"
+        android:paddingTop="50dp">
 
         <!-- Header Section -->
         <LinearLayout
@@ -62,7 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/toggle_background"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="24dp"
+            android:padding="4dp">
 
             <TextView
                 android:id="@+id/news_tab"
@@ -70,11 +71,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/news_tab"
-                android:textColor="@color/background_dark"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/go3v2"
+                android:background="@drawable/tab_selected_yellow"
                 android:gravity="center"
-                android:background="@drawable/tab_selected_yellow" />
+                android:layout_marginEnd="2dp" />
 
             <TextView
                 android:id="@+id/manga_tab"
@@ -85,123 +88,26 @@
                 android:textColor="@color/text_secondary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:gravity="center" />
+                android:fontFamily="@font/go3v2"
+                android:gravity="center"
+                android:layout_marginStart="2dp" />
 
         </LinearLayout>
 
-        <!-- Featured Content Section (Anime) / Manga Carousel (Manga) -->
-        <FrameLayout
-            android:id="@+id/featured_section"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="24dp">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/anime_carousel_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <!-- Left Navigation Button -->
-            <ImageButton
-                android:id="@+id/carousel_nav_left"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical|start"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/carousel_nav_button_bg"
-                android:src="@drawable/ic_chevron_left"
-                android:contentDescription="Previous slide"
-                android:elevation="4dp" />
-
-            <!-- Right Navigation Button -->
-            <ImageButton
-                android:id="@+id/carousel_nav_right"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/carousel_nav_button_bg"
-                android:src="@drawable/ic_chevron_right"
-                android:contentDescription="Next slide"
-                android:elevation="4dp" />
-
-            <!-- Carousel Indicators -->
-            <LinearLayout
-                android:id="@+id/carousel_indicators"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal" />
-
-        </FrameLayout>
-
-        <!-- Manga Carousel (Hidden by default) -->
+        <!-- Anime Content (Visible by default) -->
         <include
-            android:id="@+id/manga_carousel"
-            layout="@layout/manga_carousel"
+            android:id="@+id/anime_content"
+            layout="@layout/content_anime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Manga Content (Hidden by default) -->
+        <include
+            android:id="@+id/manga_content"
+            layout="@layout/content_manga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
-
-        <!-- Weekly Top 3 Section (Anime only) -->
-        <TextView
-            android:id="@+id/weekly_top_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/weekly_top_3"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/go3v2"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/weekly_top_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="32dp"
-            tools:listitem="@layout/item_weekly_top" />
-
-        <!-- Section 1 Title (Dynamic: Recent News / Popular Manga Updates) -->
-        <TextView
-            android:id="@+id/section1_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/recent_news"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/go3v2"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/section1_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="32dp"
-            android:nestedScrollingEnabled="true"
-            tools:listitem="@layout/item_recent_news" />
-
-        <!-- Section 2 Title (Dynamic: Latest Review / Latest Manga Releases) -->
-        <TextView
-            android:id="@+id/section2_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/latest_review"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/go3v2"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/section2_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_latest_review" />
 
     </LinearLayout>
 
