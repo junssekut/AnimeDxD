@@ -1,22 +1,30 @@
 package ac.id.binus.labux.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import ac.id.binus.labux.R;
+import ac.id.binus.labux.detail_page;
 import ac.id.binus.labux.model.Review;
 
 public class LatestReviewAdapter extends RecyclerView.Adapter<LatestReviewAdapter.ViewHolder> {
     private List<Review> reviewList;
     private Context context;
 
+//    private NavController navController;
+
     public LatestReviewAdapter(Context context, List<Review> reviewList) {
+//        this.navController = navController;
         this.context = context;
         this.reviewList = reviewList;
     }
@@ -43,6 +51,12 @@ public class LatestReviewAdapter extends RecyclerView.Adapter<LatestReviewAdapte
         int imageResId = context.getResources().getIdentifier(review.getImageResource(), "drawable", context.getPackageName());
         if (imageResId != 0) {
             holder.reviewImage.setImageResource(imageResId);
+            holder.reviewImage.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("reviewId", review.getTitle());
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_navigation_home_to_navigation_detail);
+            });
         }
     }
 

@@ -9,17 +9,27 @@
         android:id="@+id/navigation_home"
         android:name="ac.id.binus.labux.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_detail"
+            app:destination="@id/navigation_detail" />
+        <argument
+            android:name="reviewId"
+            app:argType="String"/>
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="ac.id.binus.labux.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_detail"
+        android:name="ac.id.binus.labux.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="ac.id.binus.labux.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+
 </navigation>

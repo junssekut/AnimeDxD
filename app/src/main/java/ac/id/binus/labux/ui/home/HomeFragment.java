@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -382,6 +383,7 @@ public class HomeFragment extends Fragment {
         // Show anime content, hide manga content
         binding.animeContent.getRoot().setVisibility(View.VISIBLE);
         binding.mangaContent.getRoot().setVisibility(View.GONE);
+
 
         // Start auto-scroll for carousel
         startAutoScroll();
