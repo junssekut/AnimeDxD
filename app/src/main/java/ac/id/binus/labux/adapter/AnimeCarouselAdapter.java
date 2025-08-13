@@ -50,6 +50,7 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
         } else {
             holder.animeImage.setImageResource(R.drawable.featured_anime);
         }
+<<<<<<< HEAD
 
         // Set click listener for the entire carousel item
         holder.itemView.setOnClickListener(v -> {
@@ -65,6 +66,8 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
         });
+=======
+>>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
     }
 
     @Override

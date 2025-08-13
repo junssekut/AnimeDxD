@@ -85,7 +85,11 @@ public class DetailFragment extends Fragment {
                 String newsImage = getArguments().getString("newsImage");
                 
                 // Debug: Log the received data
+<<<<<<< HEAD
                 android.util.Log.d("DetailFragment", "Received news data:");
+=======
+                android.util.Log.d("DetailFragment", "Received data:");
+>>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
                 android.util.Log.d("DetailFragment", "Title: " + newsTitle);
                 android.util.Log.d("DetailFragment", "Genre: " + newsGenre);
                 android.util.Log.d("DetailFragment", "Synopsis: " + newsSynopsis);
@@ -118,6 +122,7 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
+<<<<<<< HEAD
             } else if ("anime".equals(dataType)) {
                 // Handle anime data
                 String animeTitle = getArguments().getString("animeTitle");
@@ -273,6 +278,8 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
+=======
+>>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
             } else {
                 // Handle review data (existing functionality)
                 String reviewId = getArguments().getString("reviewId");

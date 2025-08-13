@@ -26,8 +26,12 @@
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
+<<<<<<< HEAD
                 android:contentDescription="Back"
                 android:layout_marginTop="20dp"/>
+=======
+                android:contentDescription="Back"/>
+>>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
 
             <!-- Header with back button and title -->
             <LinearLayout
