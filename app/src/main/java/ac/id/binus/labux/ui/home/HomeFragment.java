@@ -195,31 +195,41 @@ public class HomeFragment extends Fragment {
             "Attack On Titan",
             "In a world where humanity is on the brink of extinction due to giant humanoid creatures known as Titans...",
             "Posted on May 30, 2025",
-            "shingeki_no_kyojin"
+            "shingeki_no_kyojin",
+            "Humanity lives within enormous walls that protect them from gigantic man-eating humanoids called Titans. When the outermost wall is breached, young Eren Yeager's life changes forever as he witnesses the death of his mother. Driven by revenge, he joins the Survey Corps to fight against the Titans and uncover the truth behind their existence. As mysteries unfold, Eren discovers shocking secrets about the Titans, the walls, and his own destiny that will change everything he thought he knew about his world.",
+            "Action, Drama, Fantasy"
         ));
         recentNews.add(new News(
             "Demon Slayer",
             "After his family is slaughtered by demons and his sister is turned into one, Tanjiro Kamado becomes a demon slayer...",
             "Posted on June 3, 2025",
-            "kimetsu_no_yaiba"
+            "kimetsu_no_yaiba",
+            "Tanjiro Kamado's peaceful life is shattered when demons kill his family and transform his sister Nezuko into a demon. Determined to find a cure for Nezuko and avenge his family, Tanjiro trains to become a demon slayer. Armed with his compassionate nature and newfound skills, he embarks on a dangerous journey filled with deadly demons, powerful breathing techniques, and the hope of restoring his sister's humanity while protecting others from the same tragic fate.",
+            "Action, Supernatural, Historical"
         ));
         recentNews.add(new News(
             "Chainsaw Man",
             "In a world where humanity battles devil creatures, Denji becomes the Chainsaw Man after merging with his devil dog Pochita...",
             "Posted on June 15, 2025",
-            "chainsaw_man"
+            "chainsaw_man",
+            "Denji lives in poverty, hunting devils to pay off his father's debt to the yakuza. His only companion is Pochita, a devil dog with a chainsaw for a head. When betrayed by the yakuza and killed, Denji merges with Pochita to become Chainsaw Man, a hybrid with the power to transform parts of his body into chainsaws. Now working for the government's Public Safety Devil Hunters, Denji must navigate a world of dangerous devils while pursuing his simple dreams of a normal life.",
+            "Action, Supernatural, Dark Fantasy"
         ));
         recentNews.add(new News(
             "Tokyo Ghoul",
             "Ken Kaneki's life changes forever when he encounters his date, Rize, who reveals herself to be a flesh-eating ghoul...",
             "Posted on June 20, 2025",
-            "tokyo_ghoul"
+            "tokyo_ghoul",
+            "Ken Kaneki, a bookish college student, barely survives a date with Rize, a beautiful woman who reveals herself to be a flesh-eating ghoul. After being transplanted with Rize's organs, Kaneki becomes a half-ghoul, struggling to maintain his humanity while dealing with his new craving for human flesh. Caught between the human and ghoul worlds, he must learn to navigate this dangerous new existence while uncovering the dark secrets of both species.",
+            "Dark Fantasy, Supernatural, Thriller"
         ));
         recentNews.add(new News(
             "Sword Art Online",
             "Players become trapped in a virtual reality MMORPG where death in the game means death in real life...",
             "Posted on June 25, 2025",
-            "sword_art_online"
+            "sword_art_online",
+            "In the year 2022, virtual reality gaming reaches new heights with Sword Art Online, a VRMMORPG that allows players to control their avatars with their minds. However, when the game launches, players discover they cannot log out and that dying in the game means dying in real life. Kirito, a beta tester, must survive the 100 floors of Aincrad and defeat the final boss to free all trapped players, forming bonds and facing challenges that blur the line between virtual and reality.",
+            "Adventure, Romance, Sci-Fi"
         ));
 
         RecentNewsAdapter newsAdapter = new RecentNewsAdapter(getContext(), recentNews);
