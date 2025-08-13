@@ -1,6 +1,7 @@
 package ac.id.binus.labux.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -29,7 +32,6 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
     @Override
     public CarouselViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_anime_carousel, parent, false);
-
         return new CarouselViewHolder(view);
     }
 
@@ -49,6 +51,20 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
             holder.animeImage.setImageResource(R.drawable.featured_anime);
         }
 
+        // Set click listener for the entire carousel item
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("dataType", "anime");
+            bundle.putString("animeTitle", anime.getTitle());
+            bundle.putString("animeAuthor", anime.getAuthor() != null ? anime.getAuthor() : "Unknown Author");
+            bundle.putString("animeGenre", anime.getGenre());
+            bundle.putString("animeDescription", anime.getDescription() != null ? anime.getDescription() : "No description available");
+            bundle.putString("animeImage", anime.getImageResource());
+            bundle.putFloat("animeRating", anime.getRating());
+            
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
+        });
     }
 
     @Override

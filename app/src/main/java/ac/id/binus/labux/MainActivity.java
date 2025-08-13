@@ -45,15 +45,15 @@ public class MainActivity extends AppCompatActivity {
             updateNavigationSelection(R.id.nav_home_btn);
         });
 
-        // List button click (navigate to home for now)
+        // List button click (navigate to anime list)
         binding.navListBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.navigation_home);
+            navController.navigate(R.id.navigation_anime_list);
             updateNavigationSelection(R.id.nav_list_btn);
         });
 
-        // About button click (navigate to home for now)
+        // About button click (navigate to about page)
         binding.navAboutBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.navigation_home);
+            navController.navigate(R.id.navigation_notifications);
             updateNavigationSelection(R.id.nav_about_btn);
         });
     }

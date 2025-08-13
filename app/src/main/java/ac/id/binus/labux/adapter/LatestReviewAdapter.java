@@ -51,13 +51,35 @@ public class LatestReviewAdapter extends RecyclerView.Adapter<LatestReviewAdapte
         int imageResId = context.getResources().getIdentifier(review.getImageResource(), "drawable", context.getPackageName());
         if (imageResId != 0) {
             holder.reviewImage.setImageResource(imageResId);
-            holder.reviewImage.setOnClickListener(v -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("reviewId", review.getTitle());
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_navigation_home_to_navigation_detail);
-            });
         }
+
+        // Set click listener for the entire item to navigate to detail page
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("dataType", "review");
+            bundle.putString("reviewTitle", review.getTitle());
+            bundle.putString("reviewSubtitle", review.getSubtitle());
+            bundle.putString("reviewDescription", review.getDescription());
+            bundle.putString("reviewImage", review.getImageResource());
+            bundle.putInt("reviewRating", review.getRating());
+            
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
+        });
+
+        // Set click listener for the image as well
+        holder.reviewImage.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("dataType", "review");
+            bundle.putString("reviewTitle", review.getTitle());
+            bundle.putString("reviewSubtitle", review.getSubtitle());
+            bundle.putString("reviewDescription", review.getDescription());
+            bundle.putString("reviewImage", review.getImageResource());
+            bundle.putInt("reviewRating", review.getRating());
+            
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
+        });
     }
 
     @Override

@@ -5,12 +5,16 @@ public class News {
     private String description;
     private String date;
     private String imageResource;
+    private String synopsis;
+    private String genre;
 
-    public News(String title, String description, String date, String imageResource) {
+    public News(String title, String description, String date, String imageResource, String synopsis, String genre) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.imageResource = imageResource;
+        this.synopsis = synopsis;
+        this.genre = genre;
     }
 
     // Getters
@@ -18,10 +22,14 @@ public class News {
     public String getDescription() { return description; }
     public String getDate() { return date; }
     public String getImageResource() { return imageResource; }
+    public String getSynopsis() { return synopsis; }
+    public String getGenre() { return genre; }
 
     // Setters
     public void setTitle(String title) { this.title = title; }
     public void setDescription(String description) { this.description = description; }
     public void setDate(String date) { this.date = date; }
     public void setImageResource(String imageResource) { this.imageResource = imageResource; }
+    public void setSynopsis(String synopsis) { this.synopsis = synopsis; }
+    public void setGenre(String genre) { this.genre = genre; }
 }

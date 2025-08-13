@@ -14,22 +14,123 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_detail"
             app:destination="@id/navigation_detail" />
-        <argument
-            android:name="reviewId"
-            app:argType="String"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_anime_list"
+        android:name="ac.id.binus.labux.AnimeListFragment"
+        android:label="Anime List"
+        tools:layout="@layout/fragment_anime_list">
+
+        <action
+            android:id="@+id/action_animeListFragment_to_detailFragment"
+            app:destination="@id/navigation_detail" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_detail"
         android:name="ac.id.binus.labux.DetailFragment"
         android:label="Detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        
+        <argument
+            android:name="newsTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="newsGenre"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="newsSynopsis"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="newsImage"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="dataType"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="reviewId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="animeTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="animeAuthor"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="animeGenre"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="animeDescription"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="animeImage"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="animeRating"
+            app:argType="float"
+            android:defaultValue="0.0" />
+        <argument
+            android:name="reviewTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="reviewSubtitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="reviewDescription"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="reviewImage"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="reviewRating"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="mangaTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="mangaChapter"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="mangaDescription"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="mangaImage"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="mangaStatus"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="mangaUpdateDate"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="ac.id.binus.labux.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
+        android:name="ac.id.binus.labux.ui.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
 
 </navigation>

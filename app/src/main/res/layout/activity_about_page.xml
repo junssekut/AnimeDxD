@@ -10,6 +10,17 @@
     android:orientation="vertical"
     android:background="@color/black">
 
+    <!-- Hamburger Menu Icon -->
+    <ImageView
+        android:id="@+id/menuIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_menu"
+        android:contentDescription="Menu"
+        app:tint="@color/white" />
+
 
     <ImageView
         android:id="@+id/logo1"
