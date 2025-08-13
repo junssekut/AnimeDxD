@@ -45,19 +45,23 @@ public class MainActivity extends AppCompatActivity {
             updateNavigationSelection(R.id.nav_home_btn);
         });
 
-        // List button click (navigate to anime list)
+        // List button click (navigate to home for now)
         binding.navListBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.navigation_anime_list);
+            navController.navigate(R.id.navigation_home);
             updateNavigationSelection(R.id.nav_list_btn);
         });
 
-        // About button click (navigate to about page)
+        // About button click (navigate to home for now)
         binding.navAboutBtn.setOnClickListener(v -> {
+<<<<<<< HEAD
 <<<<<<< HEAD
             navController.navigate(R.id.navigation_notifications);
 =======
             navController.navigate(R.id.navigation_about);
 >>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
+=======
+            navController.navigate(R.id.navigation_home);
+>>>>>>> parent of 4358433 (list and home page updated)
             updateNavigationSelection(R.id.nav_about_btn);
         });
     }

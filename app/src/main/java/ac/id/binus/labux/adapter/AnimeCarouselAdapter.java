@@ -1,7 +1,6 @@
 package ac.id.binus.labux.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -32,6 +29,7 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
     @Override
     public CarouselViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_anime_carousel, parent, false);
+
         return new CarouselViewHolder(view);
     }
 
@@ -52,6 +50,7 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
         }
 <<<<<<< HEAD
 
+<<<<<<< HEAD
         // Set click listener for the entire carousel item
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -68,6 +67,8 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
         });
 =======
 >>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
+=======
+>>>>>>> parent of 4358433 (list and home page updated)
     }
 
     @Override

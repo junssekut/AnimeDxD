@@ -1,22 +1,15 @@
 package ac.id.binus.labux;
 
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import ac.id.binus.labux.databinding.FragmentDetailBinding;
 
@@ -73,8 +66,8 @@ public class DetailFragment extends Fragment {
         FragmentDetailBinding binding = FragmentDetailBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Get arguments passed from previous fragment
         if (getArguments() != null) {
+<<<<<<< HEAD
             String dataType = getArguments().getString("dataType");
             
             if ("news".equals(dataType)) {
@@ -298,6 +291,10 @@ public class DetailFragment extends Fragment {
             if (genreView != null) genreView.setText("No Genre Available");
             if (synopsisView != null) synopsisView.setText("No synopsis available");
             if (pageTitle != null) pageTitle.setText("DETAIL");
+=======
+            String reviewId = getArguments().getString("reviewId");
+            binding.setReviewId(reviewId); // bind it to the XML
+>>>>>>> parent of 4358433 (list and home page updated)
         }
 
         return view;
@@ -306,99 +303,5 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
-        // Setup back button
-        ImageView backButton = view.findViewById(R.id.btn_back);
-        if (backButton != null) {
-            backButton.setOnClickListener(v -> {
-                Navigation.findNavController(v).navigateUp();
-            });
-        }
-
-        // Setup Post Review button click
-        FrameLayout postReviewFrame = view.findViewById(R.id.post_review_frame);
-        
-        if (postReviewFrame != null) {
-            postReviewFrame.setOnClickListener(v -> showReviewPopup(v));
-        }
-    }
-
-    private void showReviewPopup(View anchorView) {
-        // Inflate the popup layout
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View popupView = inflater.inflate(R.layout.popup_review, null);
-
-        // Calculate popup width (80% of screen width)
-        int screenWidth = getResources().getDisplayMetrics().widthPixels;
-        int popupWidth = (int) (screenWidth * 0.85); // 85% of screen width
-        
-        // Create popup window with calculated width
-        PopupWindow popupWindow = new PopupWindow(
-            popupView,
-            popupWidth,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            true
-        );
-
-        // Set up popup properties
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setFocusable(true);
-        popupWindow.setElevation(10.0f);
-
-        // Create overlay view for dark background
-        View overlayView = new View(getContext());
-        overlayView.setBackgroundColor(0x80000000); // Semi-transparent black (50% opacity)
-        overlayView.setLayoutParams(new ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        ));
-
-        // Add overlay to the root view
-        ViewGroup rootView = (ViewGroup) getActivity().findViewById(android.R.id.content);
-        rootView.addView(overlayView);
-
-        // Set transparent background for popup window itself
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
-
-        // Get views from popup
-        EditText etReview = popupView.findViewById(R.id.et_review);
-        Button btnPost = popupView.findViewById(R.id.btn_post_review);
-        ImageView btnClose = popupView.findViewById(R.id.btn_close_popup);
-        TextView tvErrorMessage = popupView.findViewById(R.id.tv_error_message);
-
-        // Set up close button
-        btnClose.setOnClickListener(v -> {
-            popupWindow.dismiss();
-            rootView.removeView(overlayView); // Remove overlay when closing
-        });
-
-        // Set up post button
-        btnPost.setOnClickListener(v -> {
-            String reviewText = etReview.getText().toString().trim();
-            
-            // Simple validation: just check if empty
-            if (reviewText.isEmpty()) {
-                tvErrorMessage.setVisibility(View.VISIBLE);
-                return;
-            }
-            
-            // Hide error message if validation passes
-            tvErrorMessage.setVisibility(View.GONE);
-            
-            // Here you can handle the review submission
-            Toast.makeText(getContext(), "Review posted successfully!", Toast.LENGTH_SHORT).show();
-            popupWindow.dismiss();
-            rootView.removeView(overlayView); // Remove overlay when closing
-        });
-
-        // Set up dismiss listener to remove overlay
-        popupWindow.setOnDismissListener(() -> {
-            if (overlayView.getParent() != null) {
-                rootView.removeView(overlayView);
-            }
-        });
-
-        // Show popup at center of screen
-        popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
     }
 }

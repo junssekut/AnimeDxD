@@ -1,15 +1,12 @@
 package ac.id.binus.labux.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import ac.id.binus.labux.R;
@@ -43,19 +40,6 @@ public class MangaReleaseAdapter extends RecyclerView.Adapter<MangaReleaseAdapte
         if (imageResId != 0) {
             holder.mangaImage.setImageResource(imageResId);
         }
-
-        // Set click listener for the entire item to navigate to detail page
-        holder.itemView.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("dataType", "manga");
-            bundle.putString("mangaTitle", mangaRelease.getTitle());
-            bundle.putString("mangaChapter", mangaRelease.getChapter());
-            bundle.putString("mangaDescription", mangaRelease.getDescription());
-            bundle.putString("mangaImage", mangaRelease.getImageResource());
-            
-            NavController navController = Navigation.findNavController(v);
-            navController.navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
-        });
     }
 
     @Override
