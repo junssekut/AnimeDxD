@@ -29,7 +29,6 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
     @Override
     public CarouselViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_anime_carousel, parent, false);
-
         return new CarouselViewHolder(view);
     }
 
@@ -48,7 +47,6 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
         } else {
             holder.animeImage.setImageResource(R.drawable.featured_anime);
         }
-
     }
 
     @Override

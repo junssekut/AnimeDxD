@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
             updateNavigationSelection(R.id.nav_list_btn);
         });
 
-        // About button click (navigate to home for now)
+        // About button click (navigate to about page)
         binding.navAboutBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.navigation_home);
+            navController.navigate(R.id.navigation_about);
             updateNavigationSelection(R.id.nav_about_btn);
         });
     }

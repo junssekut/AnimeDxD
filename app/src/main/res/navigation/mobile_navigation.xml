@@ -14,22 +14,51 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_detail"
             app:destination="@id/navigation_detail" />
-        <argument
-            android:name="reviewId"
-            app:argType="String"/>
     </fragment>
 
     <fragment
         android:id="@+id/navigation_detail"
         android:name="ac.id.binus.labux.DetailFragment"
         android:label="Detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        
+        <argument
+            android:name="newsTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="newsGenre"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="newsSynopsis"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="newsImage"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="dataType"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="reviewId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="ac.id.binus.labux.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="ac.id.binus.labux.ui.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
 
 
 </navigation>

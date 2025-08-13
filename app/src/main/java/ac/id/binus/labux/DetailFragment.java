@@ -1,15 +1,22 @@
 package ac.id.binus.labux;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.navigation.Navigation;
 
 import ac.id.binus.labux.databinding.FragmentDetailBinding;
 
@@ -66,9 +73,69 @@ public class DetailFragment extends Fragment {
         FragmentDetailBinding binding = FragmentDetailBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        // Get arguments passed from previous fragment
         if (getArguments() != null) {
-            String reviewId = getArguments().getString("reviewId");
-            binding.setReviewId(reviewId); // bind it to the XML
+            String dataType = getArguments().getString("dataType");
+            
+            if ("news".equals(dataType)) {
+                // Handle news data
+                String newsTitle = getArguments().getString("newsTitle");
+                String newsGenre = getArguments().getString("newsGenre");
+                String newsSynopsis = getArguments().getString("newsSynopsis");
+                String newsImage = getArguments().getString("newsImage");
+                
+                // Debug: Log the received data
+                android.util.Log.d("DetailFragment", "Received data:");
+                android.util.Log.d("DetailFragment", "Title: " + newsTitle);
+                android.util.Log.d("DetailFragment", "Genre: " + newsGenre);
+                android.util.Log.d("DetailFragment", "Synopsis: " + newsSynopsis);
+                android.util.Log.d("DetailFragment", "Image: " + newsImage);
+                
+                // Set the data to views
+                TextView titleView = view.findViewById(R.id.titledets);
+                TextView genreView = view.findViewById(R.id.genredets);
+                TextView synopsisView = view.findViewById(R.id.syndets);
+                TextView pageTitle = view.findViewById(R.id.pageTitle);
+                ImageView imageView = view.findViewById(R.id.detailImage);
+                
+                // Set title with fallback
+                String displayTitle = (newsTitle != null && !newsTitle.isEmpty()) ? newsTitle : "Unknown Title";
+                if (titleView != null) titleView.setText(displayTitle);
+                if (pageTitle != null) pageTitle.setText(displayTitle);
+                
+                // Set genre with fallback
+                String displayGenre = (newsGenre != null && !newsGenre.isEmpty()) ? newsGenre : "Unknown Genre";
+                if (genreView != null) genreView.setText(displayGenre);
+                
+                // Set synopsis with fallback
+                String displaySynopsis = (newsSynopsis != null && !newsSynopsis.isEmpty()) ? newsSynopsis : "No synopsis available";
+                if (synopsisView != null) synopsisView.setText(displaySynopsis);
+                
+                // Set image
+                if (imageView != null && newsImage != null && !newsImage.isEmpty()) {
+                    int imageResId = getContext().getResources().getIdentifier(newsImage, "drawable", getContext().getPackageName());
+                    if (imageResId != 0) {
+                        imageView.setImageResource(imageResId);
+                    }
+                }
+            } else {
+                // Handle review data (existing functionality)
+                String reviewId = getArguments().getString("reviewId");
+                if (reviewId != null && !reviewId.isEmpty()) {
+                    binding.setReviewId(reviewId);
+                }
+            }
+        } else {
+            // No arguments received - set default values
+            TextView titleView = view.findViewById(R.id.titledets);
+            TextView genreView = view.findViewById(R.id.genredets);
+            TextView synopsisView = view.findViewById(R.id.syndets);
+            TextView pageTitle = view.findViewById(R.id.pageTitle);
+            
+            if (titleView != null) titleView.setText("No Title Available");
+            if (genreView != null) genreView.setText("No Genre Available");
+            if (synopsisView != null) synopsisView.setText("No synopsis available");
+            if (pageTitle != null) pageTitle.setText("DETAIL");
         }
 
         return view;
@@ -77,5 +144,99 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
+        // Setup back button
+        ImageView backButton = view.findViewById(R.id.btn_back);
+        if (backButton != null) {
+            backButton.setOnClickListener(v -> {
+                Navigation.findNavController(v).navigateUp();
+            });
+        }
+
+        // Setup Post Review button click
+        FrameLayout postReviewFrame = view.findViewById(R.id.post_review_frame);
+        
+        if (postReviewFrame != null) {
+            postReviewFrame.setOnClickListener(v -> showReviewPopup(v));
+        }
+    }
+
+    private void showReviewPopup(View anchorView) {
+        // Inflate the popup layout
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View popupView = inflater.inflate(R.layout.popup_review, null);
+
+        // Calculate popup width (80% of screen width)
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int popupWidth = (int) (screenWidth * 0.85); // 85% of screen width
+        
+        // Create popup window with calculated width
+        PopupWindow popupWindow = new PopupWindow(
+            popupView,
+            popupWidth,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        );
+
+        // Set up popup properties
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setElevation(10.0f);
+
+        // Create overlay view for dark background
+        View overlayView = new View(getContext());
+        overlayView.setBackgroundColor(0x80000000); // Semi-transparent black (50% opacity)
+        overlayView.setLayoutParams(new ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        ));
+
+        // Add overlay to the root view
+        ViewGroup rootView = (ViewGroup) getActivity().findViewById(android.R.id.content);
+        rootView.addView(overlayView);
+
+        // Set transparent background for popup window itself
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
+
+        // Get views from popup
+        EditText etReview = popupView.findViewById(R.id.et_review);
+        Button btnPost = popupView.findViewById(R.id.btn_post_review);
+        ImageView btnClose = popupView.findViewById(R.id.btn_close_popup);
+        TextView tvErrorMessage = popupView.findViewById(R.id.tv_error_message);
+
+        // Set up close button
+        btnClose.setOnClickListener(v -> {
+            popupWindow.dismiss();
+            rootView.removeView(overlayView); // Remove overlay when closing
+        });
+
+        // Set up post button
+        btnPost.setOnClickListener(v -> {
+            String reviewText = etReview.getText().toString().trim();
+            
+            // Simple validation: just check if empty
+            if (reviewText.isEmpty()) {
+                tvErrorMessage.setVisibility(View.VISIBLE);
+                return;
+            }
+            
+            // Hide error message if validation passes
+            tvErrorMessage.setVisibility(View.GONE);
+            
+            // Here you can handle the review submission
+            Toast.makeText(getContext(), "Review posted successfully!", Toast.LENGTH_SHORT).show();
+            popupWindow.dismiss();
+            rootView.removeView(overlayView); // Remove overlay when closing
+        });
+
+        // Set up dismiss listener to remove overlay
+        popupWindow.setOnDismissListener(() -> {
+            if (overlayView.getParent() != null) {
+                rootView.removeView(overlayView);
+            }
+        });
+
+        // Show popup at center of screen
+        popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
     }
 }

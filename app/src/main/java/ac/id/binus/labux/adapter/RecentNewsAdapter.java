@@ -1,12 +1,14 @@
 package ac.id.binus.labux.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import ac.id.binus.labux.R;
@@ -40,6 +42,18 @@ public class RecentNewsAdapter extends RecyclerView.Adapter<RecentNewsAdapter.Vi
         if (imageResId != 0) {
             holder.newsImage.setImageResource(imageResId);
         }
+
+        // Set click listener to navigate to detail page
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("newsTitle", news.getTitle());
+            bundle.putString("newsGenre", news.getGenre());
+            bundle.putString("newsSynopsis", news.getSynopsis());
+            bundle.putString("newsImage", news.getImageResource());
+            bundle.putString("dataType", "news");
+            
+            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
+        });
     }
 
     @Override
