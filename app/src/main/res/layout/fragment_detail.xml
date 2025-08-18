@@ -18,38 +18,16 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-<<<<<<< HEAD
             <ImageView
                 android:id="@+id/btn_back"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_arrow_back"
+                android:src="@drawable/ic_chevron_left"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-<<<<<<< HEAD
                 android:contentDescription="Back"
                 android:layout_marginTop="20dp"/>
-=======
-                android:contentDescription="Back"/>
->>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
-=======
-            <TextView
-                android:id="@+id/pageTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/go3v2"
-                android:text="Detail"
-                android:textSize="30sp"
-                android:textColor="@color/white" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/shingeki_no_kyojin"
-                />
->>>>>>> parent of 4358433 (list and home page updated)
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -212,4 +190,3 @@
         </LinearLayout>
     </ScrollView>
 </layout>
-

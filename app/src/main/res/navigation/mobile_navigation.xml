@@ -14,8 +14,6 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_detail"
             app:destination="@id/navigation_detail" />
-<<<<<<< HEAD
-<<<<<<< HEAD
     </fragment>
 
     <fragment
@@ -27,20 +25,12 @@
         <action
             android:id="@+id/action_animeListFragment_to_detailFragment"
             app:destination="@id/navigation_detail" />
-=======
->>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
-=======
-        <argument
-            android:name="reviewId"
-            app:argType="String"/>
->>>>>>> parent of 4358433 (list and home page updated)
     </fragment>
 
     <fragment
         android:id="@+id/navigation_detail"
         android:name="ac.id.binus.labux.DetailFragment"
         android:label="Detail"
-<<<<<<< HEAD
         tools:layout="@layout/fragment_detail">
         
         <argument
@@ -67,7 +57,6 @@
             android:name="reviewId"
             app:argType="string"
             app:nullable="true" />
-<<<<<<< HEAD
         <argument
             android:name="animeTitle"
             app:argType="string"
@@ -136,36 +125,18 @@
             android:name="mangaUpdateDate"
             app:argType="string"
             app:nullable="true" />
-=======
->>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
     </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
-<<<<<<< HEAD
         android:name="ac.id.binus.labux.ui.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
-=======
-=======
-        tools:layout="@layout/fragment_detail" />
 
-    <fragment
-        android:id="@+id/navigation_notifications"
->>>>>>> parent of 4358433 (list and home page updated)
-        android:name="ac.id.binus.labux.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-<<<<<<< HEAD
     <fragment
         android:id="@+id/navigation_about"
         android:name="ac.id.binus.labux.ui.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
-=======
->>>>>>> parent of 4358433 (list and home page updated)
-
->>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
 
 </navigation>
