@@ -15,6 +15,7 @@
     <color name="gray_dark">#333333</color>
     <color name="input_background">#40FFFFFF</color>
     <color name="social_button_bg">#2A2A2A</color>
+    <color name="login_error">#D3727E</color>
 
     <!-- Home Page Colors -->
     <color name="background_dark">#1A1A1A</color>

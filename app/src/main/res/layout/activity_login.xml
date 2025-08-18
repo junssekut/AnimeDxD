@@ -103,8 +103,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/accent_orange"
+                android:fontFamily="@font/go3v2"
+                android:textColor="@color/login_error"
                 android:textSize="12sp"
                 android:visibility="gone"
                 android:paddingStart="4dp" />
@@ -140,8 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/accent_orange"
+                android:fontFamily="@font/go3v2"
+                android:textColor="@color/login_error"
                 android:textSize="12sp"
                 android:visibility="gone"
                 android:paddingStart="4dp" />
