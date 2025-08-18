@@ -53,15 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // About button click (navigate to home for now)
         binding.navAboutBtn.setOnClickListener(v -> {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            navController.navigate(R.id.navigation_notifications);
-=======
             navController.navigate(R.id.navigation_about);
->>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
-=======
-            navController.navigate(R.id.navigation_home);
->>>>>>> parent of 4358433 (list and home page updated)
             updateNavigationSelection(R.id.nav_about_btn);
         });
     }

@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.ImageView;
 
 import ac.id.binus.labux.databinding.FragmentDetailBinding;
 
@@ -67,7 +69,6 @@ public class DetailFragment extends Fragment {
         View view = binding.getRoot();
 
         if (getArguments() != null) {
-<<<<<<< HEAD
             String dataType = getArguments().getString("dataType");
             
             if ("news".equals(dataType)) {
@@ -77,24 +78,13 @@ public class DetailFragment extends Fragment {
                 String newsSynopsis = getArguments().getString("newsSynopsis");
                 String newsImage = getArguments().getString("newsImage");
                 
-                // Debug: Log the received data
-<<<<<<< HEAD
-                android.util.Log.d("DetailFragment", "Received news data:");
-=======
-                android.util.Log.d("DetailFragment", "Received data:");
->>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
-                android.util.Log.d("DetailFragment", "Title: " + newsTitle);
-                android.util.Log.d("DetailFragment", "Genre: " + newsGenre);
-                android.util.Log.d("DetailFragment", "Synopsis: " + newsSynopsis);
-                android.util.Log.d("DetailFragment", "Image: " + newsImage);
-                
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
                 TextView pageTitle = view.findViewById(R.id.pageTitle);
-                ImageView imageView = view.findViewById(R.id.detailImage);
-                
+                ImageView imageView = view.findViewById(R.id.myImage);
+
                 // Set title with fallback
                 String displayTitle = (newsTitle != null && !newsTitle.isEmpty()) ? newsTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
@@ -115,7 +105,6 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
-<<<<<<< HEAD
             } else if ("anime".equals(dataType)) {
                 // Handle anime data
                 String animeTitle = getArguments().getString("animeTitle");
@@ -125,22 +114,13 @@ public class DetailFragment extends Fragment {
                 String animeImage = getArguments().getString("animeImage");
                 float animeRating = getArguments().getFloat("animeRating", 0.0f);
                 
-                // Debug: Log the received data
-                android.util.Log.d("DetailFragment", "Received anime data:");
-                android.util.Log.d("DetailFragment", "Title: " + animeTitle);
-                android.util.Log.d("DetailFragment", "Author: " + animeAuthor);
-                android.util.Log.d("DetailFragment", "Genre: " + animeGenre);
-                android.util.Log.d("DetailFragment", "Description: " + animeDescription);
-                android.util.Log.d("DetailFragment", "Image: " + animeImage);
-                android.util.Log.d("DetailFragment", "Rating: " + animeRating);
-                
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
                 TextView pageTitle = view.findViewById(R.id.pageTitle);
-                ImageView imageView = view.findViewById(R.id.detailImage);
-                
+                ImageView imageView = view.findViewById(R.id.myImage);
+
                 // Set title with fallback
                 String displayTitle = (animeTitle != null && !animeTitle.isEmpty()) ? animeTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
@@ -176,21 +156,13 @@ public class DetailFragment extends Fragment {
                 String reviewImage = getArguments().getString("reviewImage");
                 int reviewRating = getArguments().getInt("reviewRating", 0);
                 
-                // Debug: Log the received data
-                android.util.Log.d("DetailFragment", "Received review data:");
-                android.util.Log.d("DetailFragment", "Title: " + reviewTitle);
-                android.util.Log.d("DetailFragment", "Subtitle: " + reviewSubtitle);
-                android.util.Log.d("DetailFragment", "Description: " + reviewDescription);
-                android.util.Log.d("DetailFragment", "Image: " + reviewImage);
-                android.util.Log.d("DetailFragment", "Rating: " + reviewRating);
-                
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
                 TextView pageTitle = view.findViewById(R.id.pageTitle);
-                ImageView imageView = view.findViewById(R.id.detailImage);
-                
+                ImageView imageView = view.findViewById(R.id.myImage);
+
                 // Set title with fallback
                 String displayTitle = (reviewTitle != null && !reviewTitle.isEmpty()) ? reviewTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
@@ -227,21 +199,13 @@ public class DetailFragment extends Fragment {
                 String mangaStatus = getArguments().getString("mangaStatus");
                 String mangaUpdateDate = getArguments().getString("mangaUpdateDate");
                 
-                // Debug: Log the received data
-                android.util.Log.d("DetailFragment", "Received manga data:");
-                android.util.Log.d("DetailFragment", "Title: " + mangaTitle);
-                android.util.Log.d("DetailFragment", "Chapter: " + mangaChapter);
-                android.util.Log.d("DetailFragment", "Description: " + mangaDescription);
-                android.util.Log.d("DetailFragment", "Image: " + mangaImage);
-                android.util.Log.d("DetailFragment", "Status: " + mangaStatus);
-                
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
                 TextView pageTitle = view.findViewById(R.id.pageTitle);
-                ImageView imageView = view.findViewById(R.id.detailImage);
-                
+                ImageView imageView = view.findViewById(R.id.myImage);
+
                 // Set title with fallback
                 String displayTitle = (mangaTitle != null && !mangaTitle.isEmpty()) ? mangaTitle : "Unknown Manga";
                 if (titleView != null) titleView.setText(displayTitle);
@@ -271,8 +235,6 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
-=======
->>>>>>> c472f2326fdf3d3f5e5b9fe6dba4733460e4798f
             } else {
                 // Handle review data (existing functionality)
                 String reviewId = getArguments().getString("reviewId");
@@ -291,10 +253,6 @@ public class DetailFragment extends Fragment {
             if (genreView != null) genreView.setText("No Genre Available");
             if (synopsisView != null) synopsisView.setText("No synopsis available");
             if (pageTitle != null) pageTitle.setText("DETAIL");
-=======
-            String reviewId = getArguments().getString("reviewId");
-            binding.setReviewId(reviewId); // bind it to the XML
->>>>>>> parent of 4358433 (list and home page updated)
         }
 
         return view;
