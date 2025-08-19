@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingHorizontal="35dp"
+            android:paddingTop="50dp">
 
             <ImageView
                 android:id="@+id/btn_back"
@@ -26,8 +27,9 @@
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
+                android:layout_marginLeft="0dp"
                 android:contentDescription="Back"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="0dp"/>
 
             <!-- Header with back button and title -->
             <LinearLayout
@@ -35,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="16dp">
 
                 <TextView
@@ -49,9 +52,6 @@
                     android:textColor="@color/white" />
 
                 <!-- Invisible view for balance -->
-                <View
-                    android:layout_width="32dp"
-                    android:layout_height="32dp" />
 
             </LinearLayout>
 
@@ -93,11 +93,21 @@
                     android:gravity="start">
 
                     <TextView
+                        android:id="@+id/typedets"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/go3v2"
+                        android:text="Type"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
                         android:id="@+id/titledets"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:fontFamily="@font/comicneuebold"
+                        android:fontFamily="@font/gang_of_three"
                         android:text="Title"
                         android:textSize="35sp"
                         android:textColor="@color/golden_yellow" />
@@ -153,8 +163,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textStyle="bold"
-                        android:layout_marginLeft="10dp"
-                        android:text="Post A Review ->"
+                        android:layout_marginLeft="0dp"
+                        android:text=" Post A Review ->"
                         android:gravity="center"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"

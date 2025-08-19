@@ -95,13 +95,13 @@ public class DetailFragment extends Fragment {
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
-                TextView pageTitle = view.findViewById(R.id.pageTitle);
+//                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
                 
                 // Set title with fallback
                 String displayTitle = (newsTitle != null && !newsTitle.isEmpty()) ? newsTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
-                if (pageTitle != null) pageTitle.setText(displayTitle);
+//                if (pageTitle != null) pageTitle.setText(displayTitle);
                 
                 // Set genre with fallback
                 String displayGenre = (newsGenre != null && !newsGenre.isEmpty()) ? newsGenre : "Unknown Genre";
@@ -140,13 +140,14 @@ public class DetailFragment extends Fragment {
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
-                TextView pageTitle = view.findViewById(R.id.pageTitle);
+//                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
+                TextView typeView = view.findViewById(R.id.typedets);
                 
                 // Set title with fallback
                 String displayTitle = (animeTitle != null && !animeTitle.isEmpty()) ? animeTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
-                if (pageTitle != null) pageTitle.setText(displayTitle);
+//                if (pageTitle !pageTitle= null) pageTitle.setText(displayTitle);
                 
                 // Set genre with fallback (include author info)
                 String displayGenre = "";
@@ -170,6 +171,8 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
+
+                typeView.setText("Anime");
             } else if ("review".equals(dataType)) {
                 // Handle review data
                 String reviewTitle = getArguments().getString("reviewTitle");
@@ -190,13 +193,13 @@ public class DetailFragment extends Fragment {
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
-                TextView pageTitle = view.findViewById(R.id.pageTitle);
+//                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
                 
                 // Set title with fallback
                 String displayTitle = (reviewTitle != null && !reviewTitle.isEmpty()) ? reviewTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
-                if (pageTitle != null) pageTitle.setText(displayTitle);
+//                if (pageTitle != null) pageTitle.setText(displayTitle);
                 
                 // Set subtitle and rating as genre info
                 String displayInfo = "";
@@ -241,13 +244,14 @@ public class DetailFragment extends Fragment {
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
-                TextView pageTitle = view.findViewById(R.id.pageTitle);
+//                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
+                TextView typeView = view.findViewById(R.id.typedets);
                 
                 // Set title with fallback
                 String displayTitle = (mangaTitle != null && !mangaTitle.isEmpty()) ? mangaTitle : "Unknown Manga";
                 if (titleView != null) titleView.setText(displayTitle);
-                if (pageTitle != null) pageTitle.setText(displayTitle);
+//                if (pageTitle != null) pageTitle.setText(displayTitle);
                 
                 // Set chapter/status info as genre
                 String displayInfo = "";
@@ -273,6 +277,8 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
+
+                typeView.setText("Manga");
             } else {
                 // Handle review data (existing functionality)
                 String reviewId = getArguments().getString("reviewId");
@@ -285,12 +291,14 @@ public class DetailFragment extends Fragment {
             TextView titleView = view.findViewById(R.id.titledets);
             TextView genreView = view.findViewById(R.id.genredets);
             TextView synopsisView = view.findViewById(R.id.syndets);
-            TextView pageTitle = view.findViewById(R.id.pageTitle);
+            TextView typeView = view.findViewById(R.id.typedets);
+//            TextView pageTitle = view.findViewById(R.id.pageTitle);
             
             if (titleView != null) titleView.setText("No Title Available");
             if (genreView != null) genreView.setText("No Genre Available");
             if (synopsisView != null) synopsisView.setText("No synopsis available");
-            if (pageTitle != null) pageTitle.setText("DETAIL");
+//            if (pageTitle != null) pageTitle.setText("DETAIL");
+            if (typeView != null) typeView.setText("No type available");
         }
 
         return view;

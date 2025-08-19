@@ -428,9 +428,6 @@ public class HomeFragment extends Fragment {
             TextView animeTitle = cardView.findViewById(R.id.anime_title);
             TextView animeGenre = cardView.findViewById(R.id.anime_genre);
             TextView animeReviews = cardView.findViewById(R.id.anime_reviews);
-            TextView animeWatchingCount = cardView.findViewById(R.id.anime_watching_count);
-            TextView animeEpisodesCount = cardView.findViewById(R.id.anime_episodes_count);
-
             // Load image
             int imageResId = getContext().getResources().getIdentifier(anime.getImageResource(), "drawable", getContext().getPackageName());
             if (imageResId != 0) {
@@ -441,8 +438,6 @@ public class HomeFragment extends Fragment {
             animeTitle.setText(anime.getTitle());
             animeGenre.setText(anime.getGenre());
             animeReviews.setText("(" + anime.getReviewsCount() + " reviews)");
-            animeWatchingCount.setText(String.valueOf(anime.getWatchingCount()));
-            animeEpisodesCount.setText(String.valueOf(anime.getEpisodesCount()));
 
             // Set click listener for the entire card to navigate to detail page
             cardView.setOnClickListener(v -> {

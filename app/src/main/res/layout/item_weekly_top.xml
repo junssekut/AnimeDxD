@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/anime_image"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"
             android:src="@drawable/featured_anime"
             android:contentDescription="Anime poster image" />
@@ -44,7 +44,7 @@
                     android:layout_weight="1"
                     android:text="ACTION"
                     android:textColor="@color/golden_yellow"
-                    android:textSize="7sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/go3v2"/>
 
@@ -58,7 +58,7 @@
                     android:maxLines="2"
                     android:text="Spring Reverie"
                     android:textColor="@color/text_primary"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="(1200 reviews)"
                 android:textColor="@color/text_secondary"
-                android:textSize="6sp"
+                android:textSize="9sp"
                 android:layout_marginBottom="2dp"
                 android:fontFamily="@font/poppins"
                 android:gravity="start" />
@@ -89,72 +89,7 @@
             </LinearLayout>
 
             <!-- Bottom Info (Watching and Episodes) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="end">
 
-                <!-- Watching Count -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/info_box_bg"
-                    android:padding="3dp"
-                    android:gravity="center"
-                    android:layout_marginEnd="2dp">
-
-                    <TextView
-                        android:id="@+id/anime_watching_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3200"
-                        android:textColor="@color/text_primary"
-                        android:textSize="6sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/go3v2"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Watching"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="5sp"
-                        android:fontFamily="@font/poppins"/>
-
-                </LinearLayout>
-
-                <!-- Episodes Count -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/info_box_bg"
-                    android:padding="3dp"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/anime_episodes_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="25"
-                        android:textColor="@color/text_primary"
-                        android:textSize="6sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/go3v2"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Episodes"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="5sp"
-                        android:fontFamily="@font/poppins"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

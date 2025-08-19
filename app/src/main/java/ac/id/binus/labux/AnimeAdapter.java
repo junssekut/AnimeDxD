@@ -45,12 +45,6 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
             holder.poster.setImageResource(imageResId);
         }
         
-        // Set bookmark button click listener
-        holder.bookmarkBtn.setOnClickListener(v -> {
-            // Toggle bookmark state (you can implement actual bookmark functionality here)
-            android.widget.Toast.makeText(context, "Bookmark toggled for " + anime.getTitle(), android.widget.Toast.LENGTH_SHORT).show();
-        });
-        
         // Set click listener to navigate to detail page
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -73,7 +67,7 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
 
     public static class AnimeViewHolder extends RecyclerView.ViewHolder {
         TextView title, author, description, rating, genre;
-        ImageView poster, bookmarkBtn;
+        ImageView poster;
 
         public AnimeViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,7 +77,6 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
             rating = itemView.findViewById(R.id.textRating);
             genre = itemView.findViewById(R.id.textGenre);
             poster = itemView.findViewById(R.id.imagePoster);
-            bookmarkBtn = itemView.findViewById(R.id.btn_bookmark);
         }
     }
 }

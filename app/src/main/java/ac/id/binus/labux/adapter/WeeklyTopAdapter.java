@@ -117,8 +117,6 @@ public class WeeklyTopAdapter extends RecyclerView.Adapter<WeeklyTopAdapter.View
             animeGenre = itemView.findViewById(R.id.anime_genre);
             animeReviews = itemView.findViewById(R.id.anime_reviews);
             starRatingLayout = itemView.findViewById(R.id.star_rating_layout);
-            animeWatchingCount = itemView.findViewById(R.id.anime_watching_count);
-            animeEpisodesCount = itemView.findViewById(R.id.anime_episodes_count);
         }
     }
 }

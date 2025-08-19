@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="0dp"
                     android:text="Post A Review ->"
                     android:gravity="center"
                     android:textColor="@android:color/black"

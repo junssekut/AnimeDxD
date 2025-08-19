@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/welcome_description"
             android:textSize="14sp"
+            android:justificationMode="inter_word"
             android:textColor="@color/text_secondary"
             android:fontFamily="@font/poppins"
             android:lineSpacingExtra="4dp"

@@ -61,13 +61,6 @@
                 android:textSize="16sp"
                 android:fontFamily="@font/go3v2" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="By Popularity"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:fontFamily="@font/go3v2" />
 
         </LinearLayout>
 
