@@ -22,6 +22,7 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
 
     private Context context;
     private List<Anime> animeList;
+    private static final int FAKE_COUNT = 1000; // Large number to simulate infinite scrolling
 
     public AnimeCarouselAdapter(Context context, List<Anime> animeList) {
         this.context = context;
@@ -37,7 +38,9 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
 
     @Override
     public void onBindViewHolder(@NonNull CarouselViewHolder holder, int position) {
-        Anime anime = animeList.get(position);
+        // Get actual position by using modulo to wrap around
+        int actualPosition = position % animeList.size();
+        Anime anime = animeList.get(actualPosition);
 
         // Set anime title and genre
         holder.animeTitle.setText(anime.getTitle());
@@ -69,7 +72,22 @@ public class AnimeCarouselAdapter extends RecyclerView.Adapter<AnimeCarouselAdap
 
     @Override
     public int getItemCount() {
+        return animeList.isEmpty() ? 0 : FAKE_COUNT; // Return large count for infinite scrolling
+    }
+
+    // Method to get the real position for indicator updates
+    public int getRealPosition(int position) {
+        return position % animeList.size();
+    }
+
+    // Method to get the real count for indicators
+    public int getRealCount() {
         return animeList.size();
+    }
+
+    // Method to get starting position (middle of fake range)
+    public int getStartPosition() {
+        return animeList.isEmpty() ? 0 : (FAKE_COUNT / 2) - ((FAKE_COUNT / 2) % animeList.size());
     }
 
     public static class CarouselViewHolder extends RecyclerView.ViewHolder {

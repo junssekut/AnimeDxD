@@ -40,7 +40,8 @@
             android:text="Attack On Titan"
             android:textColor="@color/text_secondary"
             android:textSize="14sp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppins_medium"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,14 +63,16 @@
             android:id="@+id/review_description"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:lineSpacingExtra="2dp"
+            android:maxLines="4"
             android:text="Whispers from the Abyss: A hilarious isekai parody packed with chaotic energy, ridiculous party dynamics, and laugh-out-loud moments. It's quirky characters—especially Kazuma and Aqua—turn every quest into a disaster in the best way possible. A perfect pick for when you want comedy and fun without taking things too seriously!"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp"
-            android:lineSpacingExtra="2dp"
-            android:ellipsize="end"
-            android:maxLines="4"
-            android:layout_marginBottom="8dp" />
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="10sp"
+            android:justificationMode="inter_word"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,26 +84,28 @@
                 android:id="@+id/reply_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📝 Reply to this review"
+                android:text="📝 Reply"
                 android:textColor="@color/golden_yellow"
                 android:textSize="10sp"
                 android:layout_marginEnd="16dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?android:attr/selectableItemBackground"
-                android:padding="2dp" />
+                android:padding="2dp"
+                android:fontFamily="@font/poppins_light"/>
 
             <TextView
                 android:id="@+id/share_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📤 Share this review"
+                android:text="📤 Share"
                 android:textColor="@color/golden_yellow"
                 android:textSize="10sp"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?android:attr/selectableItemBackground"
-                android:padding="2dp" />
+                android:padding="2dp"
+                android:fontFamily="@font/poppins_light"/>
 
         </LinearLayout>
 

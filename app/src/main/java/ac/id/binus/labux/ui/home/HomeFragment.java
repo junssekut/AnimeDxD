@@ -152,6 +152,10 @@ public class HomeFragment extends Fragment {
         carouselAdapter = new AnimeCarouselAdapter(getContext(), carouselAnimeList);
         carouselViewPager.setAdapter(carouselAdapter);
 
+        // Set starting position to middle for infinite scrolling
+        int startPosition = carouselAdapter.getStartPosition();
+        carouselViewPager.setCurrentItem(startPosition, false);
+
         // Setup indicators
         setupCarouselIndicators(carouselIndicators);
 
@@ -160,8 +164,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                currentPage = position;
-                updateIndicators(position, carouselIndicators);
+                // Get real position for indicators
+                int realPosition = carouselAdapter.getRealPosition(position);
+                currentPage = realPosition;
+                updateIndicators(realPosition, carouselIndicators);
             }
         });
 
@@ -207,8 +213,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void run() {
                 if (carouselAnimeList != null && carouselAnimeList.size() > 0) {
-                    currentPage = (currentPage + 1) % carouselAnimeList.size();
-                    carouselViewPager.setCurrentItem(currentPage, true);
+                    int currentItem = carouselViewPager.getCurrentItem();
+                    carouselViewPager.setCurrentItem(currentItem + 1, true);
                     autoScrollHandler.postDelayed(this, 5000); // 5 seconds
                 }
             }
@@ -563,34 +569,14 @@ public class HomeFragment extends Fragment {
 
         carouselNavLeft.setOnClickListener(v -> {
             int currentItem = carouselViewPager.getCurrentItem();
-            int previousItem;
-
-            if (currentItem == 0) {
-                // Wrap to last item
-                previousItem = carouselAnimeList.size() - 1;
-            } else {
-                previousItem = currentItem - 1;
-            }
-
-            carouselViewPager.setCurrentItem(previousItem, true);
-
+            carouselViewPager.setCurrentItem(currentItem - 1, true);
             // Reset auto-scroll timer when user manually navigates
             startAutoScroll();
         });
 
         carouselNavRight.setOnClickListener(v -> {
             int currentItem = carouselViewPager.getCurrentItem();
-            int nextItem;
-
-            if (currentItem == carouselAnimeList.size() - 1) {
-                // Wrap to first item
-                nextItem = 0;
-            } else {
-                nextItem = currentItem + 1;
-            }
-
-            carouselViewPager.setCurrentItem(nextItem, true);
-
+            carouselViewPager.setCurrentItem(currentItem + 1, true);
             // Reset auto-scroll timer when user manually navigates
             startAutoScroll();
         });

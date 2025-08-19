@@ -84,25 +84,19 @@ public class DetailFragment extends Fragment {
                 String newsSynopsis = getArguments().getString("newsSynopsis");
                 String newsImage = getArguments().getString("newsImage");
                 
-                // Debug: Log the received data
-                android.util.Log.d("DetailFragment", "Received news data:");
-                android.util.Log.d("DetailFragment", "Title: " + newsTitle);
-                android.util.Log.d("DetailFragment", "Genre: " + newsGenre);
-                android.util.Log.d("DetailFragment", "Synopsis: " + newsSynopsis);
-                android.util.Log.d("DetailFragment", "Image: " + newsImage);
-                
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
-//                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
-                
+                TextView typeView = view.findViewById(R.id.typedets);
+                TextView authorView = view.findViewById(R.id.authordets);
+                TextView ratingView = view.findViewById(R.id.ratingdets);
+
                 // Set title with fallback
                 String displayTitle = (newsTitle != null && !newsTitle.isEmpty()) ? newsTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
-//                if (pageTitle != null) pageTitle.setText(displayTitle);
-                
+
                 // Set genre with fallback
                 String displayGenre = (newsGenre != null && !newsGenre.isEmpty()) ? newsGenre : "Unknown Genre";
                 if (genreView != null) genreView.setText(displayGenre);
@@ -118,6 +112,14 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
+
+                // Set type
+                if (typeView != null) typeView.setText("News");
+
+                // Hide author and rating for news (not applicable)
+                if (authorView != null) authorView.setVisibility(View.GONE);
+                if (ratingView != null) ratingView.setVisibility(View.GONE);
+
             } else if ("anime".equals(dataType)) {
                 // Handle anime data
                 String animeTitle = getArguments().getString("animeTitle");
@@ -185,37 +187,23 @@ public class DetailFragment extends Fragment {
                 String reviewImage = getArguments().getString("reviewImage");
                 int reviewRating = getArguments().getInt("reviewRating", 0);
                 
-                // Debug: Log the received data
-                android.util.Log.d("DetailFragment", "Received review data:");
-                android.util.Log.d("DetailFragment", "Title: " + reviewTitle);
-                android.util.Log.d("DetailFragment", "Subtitle: " + reviewSubtitle);
-                android.util.Log.d("DetailFragment", "Description: " + reviewDescription);
-                android.util.Log.d("DetailFragment", "Image: " + reviewImage);
-                android.util.Log.d("DetailFragment", "Rating: " + reviewRating);
-                
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
-//                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
-                
+                TextView typeView = view.findViewById(R.id.typedets);
+                TextView authorView = view.findViewById(R.id.authordets);
+                TextView ratingView = view.findViewById(R.id.ratingdets);
+
                 // Set title with fallback
                 String displayTitle = (reviewTitle != null && !reviewTitle.isEmpty()) ? reviewTitle : "Unknown Title";
                 if (titleView != null) titleView.setText(displayTitle);
-//                if (pageTitle != null) pageTitle.setText(displayTitle);
-                
-                // Set subtitle and rating as genre info
-                String displayInfo = "";
-                if (reviewSubtitle != null && !reviewSubtitle.isEmpty()) {
-                    displayInfo = reviewSubtitle;
-                }
-                if (reviewRating > 0) {
-                    String stars = "★".repeat(reviewRating) + "☆".repeat(5 - reviewRating);
-                    displayInfo += (displayInfo.isEmpty() ? "" : " • ") + stars;
-                }
-                if (genreView != null) genreView.setText(displayInfo.isEmpty() ? "No info available" : displayInfo);
-                
+
+                // Set subtitle as genre info
+                String displayGenre = (reviewSubtitle != null && !reviewSubtitle.isEmpty()) ? reviewSubtitle : "Review";
+                if (genreView != null) genreView.setText(displayGenre);
+
                 // Set description with fallback
                 String displayDescription = (reviewDescription != null && !reviewDescription.isEmpty()) ? reviewDescription : "No description available";
                 if (synopsisView != null) synopsisView.setText(displayDescription);
@@ -227,6 +215,23 @@ public class DetailFragment extends Fragment {
                         imageView.setImageResource(imageResId);
                     }
                 }
+
+                // Set type
+                if (typeView != null) typeView.setText("Review");
+
+                // Show rating if available, hide if not
+                if (reviewRating > 0) {
+                    String stars = "★".repeat(reviewRating) + "☆".repeat(5 - reviewRating);
+                    if (ratingView != null) {
+                        ratingView.setText(stars);
+                        ratingView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (ratingView != null) ratingView.setVisibility(View.GONE);
+                }
+
+                // Hide author for reviews (not applicable)
+                if (authorView != null) authorView.setVisibility(View.GONE);
             } else if ("manga".equals(dataType)) {
                 // Handle manga data
                 String mangaTitle = getArguments().getString("mangaTitle");
@@ -235,28 +240,21 @@ public class DetailFragment extends Fragment {
                 String mangaImage = getArguments().getString("mangaImage");
                 String mangaStatus = getArguments().getString("mangaStatus");
                 String mangaUpdateDate = getArguments().getString("mangaUpdateDate");
-                
-                // Debug: Log the received data
-                android.util.Log.d("DetailFragment", "Received manga data:");
-                android.util.Log.d("DetailFragment", "Title: " + mangaTitle);
-                android.util.Log.d("DetailFragment", "Chapter: " + mangaChapter);
-                android.util.Log.d("DetailFragment", "Description: " + mangaDescription);
-                android.util.Log.d("DetailFragment", "Image: " + mangaImage);
-                android.util.Log.d("DetailFragment", "Status: " + mangaStatus);
-                
+                String mangaAuthor = getArguments().getString("mangaAuthor");
+
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
                 TextView genreView = view.findViewById(R.id.genredets);
                 TextView synopsisView = view.findViewById(R.id.syndets);
-//                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
                 TextView typeView = view.findViewById(R.id.typedets);
-                
+                TextView authorView = view.findViewById(R.id.authordets);
+                TextView ratingView = view.findViewById(R.id.ratingdets);
+
                 // Set title with fallback
                 String displayTitle = (mangaTitle != null && !mangaTitle.isEmpty()) ? mangaTitle : "Unknown Manga";
                 if (titleView != null) titleView.setText(displayTitle);
-//                if (pageTitle != null) pageTitle.setText(displayTitle);
-                
+
                 // Set chapter/status info as genre
                 String displayInfo = "";
                 if (mangaChapter != null && !mangaChapter.isEmpty()) {
@@ -282,7 +280,21 @@ public class DetailFragment extends Fragment {
                     }
                 }
 
-                typeView.setText("Manga");
+                // Set type
+                if (typeView != null) typeView.setText("Manga");
+
+                // Show author if available, hide if not
+                if (mangaAuthor != null && !mangaAuthor.isEmpty()) {
+                    if (authorView != null) {
+                        authorView.setText(mangaAuthor);
+                        authorView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (authorView != null) authorView.setVisibility(View.GONE);
+                }
+
+                // Hide rating for manga (not typically used)
+                if (ratingView != null) ratingView.setVisibility(View.GONE);
             } else {
                 // Handle review data (existing functionality)
                 String reviewId = getArguments().getString("reviewId");
