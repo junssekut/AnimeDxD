@@ -88,9 +88,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recent_news_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="32dp"
-        android:nestedScrollingEnabled="true"
         tools:listitem="@layout/item_recent_news" />
 
     <!-- Latest Review Section -->

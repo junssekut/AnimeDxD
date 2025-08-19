@@ -143,6 +143,9 @@ public class DetailFragment extends Fragment {
 //                TextView pageTitle = view.findViewById(R.id.pageTitle);
                 ImageView imageView = view.findViewById(R.id.detailImage);
                 TextView typeView = view.findViewById(R.id.typedets);
+
+                TextView authorView = view.findViewById(R.id.authordets);
+                TextView ratingView = view.findViewById(R.id.ratingdets);
                 
                 // Set title with fallback
                 String displayTitle = (animeTitle != null && !animeTitle.isEmpty()) ? animeTitle : "Unknown Title";
@@ -150,15 +153,16 @@ public class DetailFragment extends Fragment {
 //                if (pageTitle !pageTitle= null) pageTitle.setText(displayTitle);
                 
                 // Set genre with fallback (include author info)
-                String displayGenre = "";
-                if (animeAuthor != null && !animeAuthor.isEmpty()) {
-                    displayGenre = animeAuthor + " • ";
-                }
-                displayGenre += (animeGenre != null && !animeGenre.isEmpty()) ? animeGenre : "Unknown Genre";
-                if (animeRating > 0) {
-                    displayGenre += " • ★ " + animeRating;
-                }
+                String displayGenre = (animeGenre != null && !animeGenre.isEmpty()) ? animeGenre : "Unknown Genre";
                 if (genreView != null) genreView.setText(displayGenre);
+
+                String displayAuthor = (animeAuthor != null && !animeAuthor.isEmpty()) ? animeAuthor : "Unknown Author";
+                if (authorView != null) authorView.setText(displayAuthor);
+
+                // Set rating with fallback
+                String displayRating = (animeRating > 0) ? "★ " + animeRating
+                        : "No rating available";
+                if (ratingView != null) ratingView.setText(displayRating);
                 
                 // Set description with fallback
                 String displayDescription = (animeDescription != null && !animeDescription.isEmpty()) ? animeDescription : "No description available";
