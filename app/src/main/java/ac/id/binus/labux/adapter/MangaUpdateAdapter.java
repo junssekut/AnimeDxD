@@ -76,7 +76,7 @@ public class MangaUpdateAdapter extends RecyclerView.Adapter<MangaUpdateAdapter.
             mangaImage = itemView.findViewById(R.id.manga_image);
             mangaTitle = itemView.findViewById(R.id.manga_title);
             updateDate = itemView.findViewById(R.id.update_date);
-            status = itemView.findViewById(R.id.status);
+//            status = itemView.findViewById(R.id.status);
         }
     }
 }

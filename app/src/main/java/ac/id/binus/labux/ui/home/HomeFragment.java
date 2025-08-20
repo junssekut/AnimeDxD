@@ -324,10 +324,9 @@ public class HomeFragment extends Fragment {
     private void setupMangaContent() {
         View mangaContent = binding.mangaContent.getRoot();
 
-        // Setup Manga Updates RecyclerView
-        RecyclerView mangaUpdatesRecyclerView = mangaContent.findViewById(R.id.manga_updates_recyclerview);
-        LinearLayoutManager mangaUpdateLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mangaUpdatesRecyclerView.setLayoutManager(mangaUpdateLayoutManager);
+        // Setup Manga Updates Container (horizontal layout)
+        LinearLayout mangaUpdatesContainer = mangaContent.findViewById(R.id.manga_updates_container);
+        mangaUpdatesContainer.removeAllViews();
 
         List<MangaUpdate> mangaUpdates = new ArrayList<>();
         mangaUpdates.add(new MangaUpdate(
@@ -349,8 +348,55 @@ public class HomeFragment extends Fragment {
             "Ch.97"
         ));
 
-        MangaUpdateAdapter mangaUpdateAdapter = new MangaUpdateAdapter(getContext(), mangaUpdates);
-        mangaUpdatesRecyclerView.setAdapter(mangaUpdateAdapter);
+        // Add each manga update item to the horizontal container
+        for (MangaUpdate mangaUpdate : mangaUpdates) {
+            View itemView = getLayoutInflater().inflate(R.layout.item_manga_update, mangaUpdatesContainer, false);
+
+            // Set layout params to distribute items evenly
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                0,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                1.0f // Equal weight for each item
+            );
+            layoutParams.setMargins(8, 0, 8, 0); // Add some spacing between items
+            itemView.setLayoutParams(layoutParams);
+
+            // Bind data to the views
+            ImageView mangaImage = itemView.findViewById(R.id.manga_image);
+            TextView mangaTitle = itemView.findViewById(R.id.manga_title);
+            TextView updateDate = itemView.findViewById(R.id.update_date);
+//            TextView status = itemView.findViewById(R.id.status);
+
+            // Set the data
+            if (mangaTitle != null) mangaTitle.setText(mangaUpdate.getTitle());
+            if (updateDate != null) updateDate.setText(mangaUpdate.getUpdateDate());
+//            if (status != null) status.setText(mangaUpdate.getStatus());
+
+            // Set image
+            if (mangaImage != null && mangaUpdate.getImageResource() != null) {
+                int imageResId = getContext().getResources().getIdentifier(
+                    mangaUpdate.getImageResource(), "drawable", getContext().getPackageName());
+                if (imageResId != 0) {
+                    mangaImage.setImageResource(imageResId);
+                } else {
+                    mangaImage.setImageResource(R.drawable.featured_anime);
+                }
+            }
+
+            // Add click listener for navigation to detail page
+            itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("dataType", "manga");
+                bundle.putString("mangaTitle", mangaUpdate.getTitle());
+                bundle.putString("mangaChapter", mangaUpdate.getStatus());
+                bundle.putString("mangaUpdateDate", mangaUpdate.getUpdateDate());
+                bundle.putString("mangaImage", mangaUpdate.getImageResource());
+
+                Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
+            });
+
+            mangaUpdatesContainer.addView(itemView);
+        }
 
         // Setup Manga Releases RecyclerView
         RecyclerView mangaReleasesRecyclerView = mangaContent.findViewById(R.id.manga_releases_recyclerview);

@@ -48,18 +48,6 @@
                 android:fontFamily="@font/poppins"
                 android:layout_marginTop="2dp" />
 
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ch.159"
-                android:textColor="@color/golden_yellow"
-                android:textSize="8sp"
-                android:fontFamily="@font/poppins"
-                android:background="@drawable/status_background"
-                android:padding="2dp"
-                android:layout_marginTop="4dp" />
-
         </LinearLayout>
 
     </LinearLayout>
