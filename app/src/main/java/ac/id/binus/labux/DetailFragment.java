@@ -241,6 +241,8 @@ public class DetailFragment extends Fragment {
                 String mangaStatus = getArguments().getString("mangaStatus");
                 String mangaUpdateDate = getArguments().getString("mangaUpdateDate");
                 String mangaAuthor = getArguments().getString("mangaAuthor");
+                String mangaGenre = getArguments().getString("mangaGenre");
+                float mangaRating = getArguments().getFloat("mangaRating", 0.0f);
 
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
@@ -255,10 +257,13 @@ public class DetailFragment extends Fragment {
                 String displayTitle = (mangaTitle != null && !mangaTitle.isEmpty()) ? mangaTitle : "Unknown Manga";
                 if (titleView != null) titleView.setText(displayTitle);
 
-                // Set chapter/status info as genre
+                // Set genre info with chapter/status/date as additional info
                 String displayInfo = "";
+                if (mangaGenre != null && !mangaGenre.isEmpty()) {
+                    displayInfo = mangaGenre;
+                }
                 if (mangaChapter != null && !mangaChapter.isEmpty()) {
-                    displayInfo = mangaChapter;
+                    displayInfo += (displayInfo.isEmpty() ? "" : " • ") + mangaChapter;
                 }
                 if (mangaStatus != null && !mangaStatus.isEmpty()) {
                     displayInfo += (displayInfo.isEmpty() ? "" : " • ") + mangaStatus;
@@ -293,8 +298,16 @@ public class DetailFragment extends Fragment {
                     if (authorView != null) authorView.setVisibility(View.GONE);
                 }
 
-                // Hide rating for manga (not typically used)
-                if (ratingView != null) ratingView.setVisibility(View.GONE);
+                // Show rating if available for manga carousel items
+                if (mangaRating > 0) {
+                    String displayRating = "★ " + mangaRating;
+                    if (ratingView != null) {
+                        ratingView.setText(displayRating);
+                        ratingView.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (ratingView != null) ratingView.setVisibility(View.GONE);
+                }
             } else {
                 // Handle review data (existing functionality)
                 String reviewId = getArguments().getString("reviewId");

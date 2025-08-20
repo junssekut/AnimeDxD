@@ -324,6 +324,9 @@ public class HomeFragment extends Fragment {
     private void setupMangaContent() {
         View mangaContent = binding.mangaContent.getRoot();
 
+        // Setup Manga Carousel Click Functionality
+        setupMangaCarouselClickListeners(mangaContent);
+
         // Setup Manga Updates Container (horizontal layout)
         LinearLayout mangaUpdatesContainer = mangaContent.findViewById(R.id.manga_updates_container);
         mangaUpdatesContainer.removeAllViews();
@@ -626,6 +629,84 @@ public class HomeFragment extends Fragment {
             // Reset auto-scroll timer when user manually navigates
             startAutoScroll();
         });
+    }
+
+    private void setupMangaCarouselClickListeners(View mangaContent) {
+        // Find the manga carousel cards from the included layout
+        View mangaCarouselLayout = mangaContent.findViewById(R.id.manga_carousel);
+        if (mangaCarouselLayout == null) {
+            // If not found, try to get the include directly
+            View includeLayout = getLayoutInflater().inflate(R.layout.manga_carousel, null);
+            setupCarouselCardClickListeners(includeLayout);
+        } else {
+            setupCarouselCardClickListeners(mangaCarouselLayout);
+        }
+    }
+
+    private void setupCarouselCardClickListeners(View carouselLayout) {
+        // Find the first card (Hot Manga 2025)
+        androidx.cardview.widget.CardView hotMangaCard = carouselLayout.findViewById(R.id.hot_manga_card);
+        if (hotMangaCard == null) {
+            // If ID doesn't exist, find by layout structure - first CardView
+            ViewGroup rootLayout = (ViewGroup) carouselLayout;
+            for (int i = 0; i < rootLayout.getChildCount(); i++) {
+                View child = rootLayout.getChildAt(i);
+                if (child instanceof androidx.cardview.widget.CardView) {
+                    hotMangaCard = (androidx.cardview.widget.CardView) child;
+                    break;
+                }
+            }
+        }
+
+        // Find the second card (Top 10 Anime Guys)
+        androidx.cardview.widget.CardView topGuysCard = carouselLayout.findViewById(R.id.top_guys_card);
+        if (topGuysCard == null) {
+            // If ID doesn't exist, find by layout structure - second CardView
+            ViewGroup rootLayout = (ViewGroup) carouselLayout;
+            int cardCount = 0;
+            for (int i = 0; i < rootLayout.getChildCount(); i++) {
+                View child = rootLayout.getChildAt(i);
+                if (child instanceof androidx.cardview.widget.CardView) {
+                    cardCount++;
+                    if (cardCount == 2) {
+                        topGuysCard = (androidx.cardview.widget.CardView) child;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Set click listener for Hot Manga 2025 card
+        if (hotMangaCard != null) {
+            hotMangaCard.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("dataType", "manga");
+                bundle.putString("mangaTitle", "Kimtesu No Yaiba: Hot Manga 2025");
+                bundle.putString("mangaAuthor", "Koyoharu Gotouge");
+                bundle.putString("mangaGenre", "Action, Adventure, Fantasy");
+                bundle.putString("mangaDescription", "In a world where demons prey on humans, Tanjiro Kamado becomes a demon slayer to avenge his family and save his sister Nezuko, who has been turned into a demon. With the help of fellow slayers, he battles powerful demons while uncovering the secrets of their existence.");
+                bundle.putString("mangaImage", "kimetsu_no_yaiba_manga");
+                bundle.putFloat("mangaRating", 8.8f);
+
+                Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
+            });
+        }
+
+        // Set click listener for Top 10 Anime Guys card
+        if (topGuysCard != null) {
+            topGuysCard.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("dataType", "manga");
+                bundle.putString("mangaTitle", "Tokyo Ghoul: Top 10 Anime Guys With Handsome Looks");
+                bundle.putString("mangaAuthor", "Sui Ishida");
+                bundle.putString("mangaGenre", "Romance, Drama, Action");
+                bundle.putString("mangaDescription", "In a world where flesh-eating ghouls exist alongside humans, Ken Kaneki becomes a half-ghoul after a near-fatal encounter. Struggling with his new identity, he navigates the dangerous world of ghouls while trying to maintain his humanity and protect those he loves.");
+                bundle.putString("mangaImage", "tokyo_ghoul_manga");
+                bundle.putFloat("mangaRating", 8.5f);
+
+                Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
+            });
+        }
     }
 
     @Override

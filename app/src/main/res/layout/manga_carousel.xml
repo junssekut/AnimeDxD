@@ -8,6 +8,7 @@
 
     <!-- Hot Manga 2025 -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/hot_manga_card"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
@@ -48,6 +49,7 @@
 
     <!-- Top 10 Anime Guys With Handsome Looks -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/top_guys_card"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
