@@ -333,22 +333,34 @@ public class HomeFragment extends Fragment {
 
         List<MangaUpdate> mangaUpdates = new ArrayList<>();
         mangaUpdates.add(new MangaUpdate(
-            "Tensei Shitara Slime Datta",
+            "Shingeki No Kyojin",
+            "Hajime Isayama",
+            "In a world where humanity is on the brink of extinction due to giant humanoid creatures known as Titans, the story follows Eren Yeager and his friends as they join the fight for survival and uncover the dark secrets behind the Titans.",
+            "Action, Drama, Fantasy, Military",
+            9.2f,
+            "Ch.139",
             "Dec 7, 2024",
-            "shingeki_no_kyojin_manga",
-            "Ch.159"
+            "shingeki_no_kyojin_manga"
         ));
         mangaUpdates.add(new MangaUpdate(
-            "Kusuriya no Hitorigoto",
+            "Kimetsu No Yaiba",
+            "Koyoharu Gotouge",
+            "After his family is slaughtered by demons and his sister Nezuko is turned into one, Tanjiro Kamado becomes a demon slayer to find a cure for his sister and avenge his family.",
+            "Action, Historical, Supernatural, Shounen",
+            8.9f,
+            "Ch.205",
             "Feb 14, 2025",
-            "kimetsu_no_yaiba_manga",
-            "Ch.78"
+            "kimetsu_no_yaiba_manga"
         ));
         mangaUpdates.add(new MangaUpdate(
-            "Sono Bisque Doll wa Koi wo Suru",
+            "Tokyo Ghoul",
+            "Sui Ishida",
+            "Ken Kaneki, a bookish college student, meets Rize, a girl his own age with whom he shares compatibility. However, Rize is not exactly who she seems, and this unfortunate meeting pushes Kaneki into the dark depths of the ghouls' inhuman world.",
+            "Action, Horror, Supernatural, Seinen",
+            8.7f,
+            "Ch.143",
             "May 11, 2025",
-            "tokyo_ghoul_manga",
-            "Ch.97"
+            "tokyo_ghoul_manga"
         ));
 
         // Add each manga update item to the horizontal container
@@ -391,9 +403,13 @@ public class HomeFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("dataType", "manga");
                 bundle.putString("mangaTitle", mangaUpdate.getTitle());
-                bundle.putString("mangaChapter", mangaUpdate.getStatus());
-                bundle.putString("mangaUpdateDate", mangaUpdate.getUpdateDate());
+//                bundle.putString("mangaChapter", mangaUpdate.getStatus());
+//                bundle.putString("mangaUpdateDate", mangaUpdate.getUpdateDate());
                 bundle.putString("mangaImage", mangaUpdate.getImageResource());
+                bundle.putString("mangaAuthor", mangaUpdate.getAuthor());
+                bundle.putFloat("mangaRating", mangaUpdate.getRating());
+                bundle.putString("mangaGenre", mangaUpdate.getGenres());
+                bundle.putString("mangaDescription", mangaUpdate.getDescription());
 
                 Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_navigation_detail, bundle);
             });

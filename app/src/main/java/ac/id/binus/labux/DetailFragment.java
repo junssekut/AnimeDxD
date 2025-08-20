@@ -244,7 +244,7 @@ public class DetailFragment extends Fragment {
                 String mangaUpdateDate = getArguments().getString("mangaUpdateDate");
                 String mangaAuthor = getArguments().getString("mangaAuthor");
                 String mangaGenre = getArguments().getString("mangaGenre");
-                float mangaRating = getArguments().getFloat("mangaRating", 0.0f);
+                float mangaRating = getArguments().getFloat("mangaRating", 5.3f);
 
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);

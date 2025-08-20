@@ -119,7 +119,7 @@
 
                         <TextView
                             android:id="@+id/authordets"
-                            android:layout_width="wrap_content"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/go3v2"
                             android:text="Author"
@@ -129,7 +129,7 @@
 
                         <TextView
                             android:id="@+id/genredets"
-                            android:layout_width="wrap_content"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/go3v2"
                             android:text="Genre"
@@ -140,7 +140,7 @@
 
                         <TextView
                             android:id="@+id/ratingdets"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/go3v2"
                             android:text="★ 1.0"
