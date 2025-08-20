@@ -19,6 +19,7 @@
 
     <!-- Home Page Colors -->
     <color name="background_dark">#1A1A1A</color>
+    <color name="app_background">#1A1A1A</color>
     <color name="card_background">#2A2A2A</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#CCCCCC</color>

@@ -1,6 +1,8 @@
 package ac.id.binus.labux;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -409,16 +411,43 @@ public class DetailFragment extends Fragment {
             // Simple validation: just check if empty
             if (reviewText.isEmpty()) {
                 tvErrorMessage.setVisibility(View.VISIBLE);
+                // Set button to red color for error
+                setPopupButtonColor(btnPost, "#D3727E");
                 return;
             }
             
             // Hide error message if validation passes
             tvErrorMessage.setVisibility(View.GONE);
             
-            // Here you can handle the review submission
-            Toast.makeText(getContext(), "Review posted successfully!", Toast.LENGTH_SHORT).show();
-            popupWindow.dismiss();
-            rootView.removeView(overlayView); // Remove overlay when closing
+            // Set button to green color for success
+            setPopupButtonColor(btnPost, "#70B603");
+
+            // Disable button to prevent multiple clicks
+            btnPost.setEnabled(false);
+
+            // Show success feedback with delay
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                // Here you can handle the review submission
+                Toast.makeText(getContext(), "Review posted successfully!", Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+                rootView.removeView(overlayView); // Remove overlay when closing
+            }, 1500); // 1.5 second delay to show green color
+        });
+
+        // Reset button color when user starts typing
+        etReview.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                resetPopupButtonColor(btnPost);
+                btnPost.setEnabled(true);
+                tvErrorMessage.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
         });
 
         // Set up dismiss listener to remove overlay
@@ -430,5 +459,20 @@ public class DetailFragment extends Fragment {
 
         // Show popup at center of screen
         popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
+    }
+
+    private void setPopupButtonColor(Button button, String colorHex) {
+        // Use background tint to color the existing drawable (same approach as login button)
+        android.content.res.ColorStateList colorStateList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor(colorHex));
+        button.setBackgroundTintList(colorStateList);
+
+        // Debug log
+        android.util.Log.d("DetailFragment", "Setting popup button color to: " + colorHex);
+    }
+
+    private void resetPopupButtonColor(Button button) {
+        // Clear the background tint to restore original appearance
+        button.setBackgroundTintList(null);
+        android.util.Log.d("DetailFragment", "Resetting popup button color");
     }
 }
