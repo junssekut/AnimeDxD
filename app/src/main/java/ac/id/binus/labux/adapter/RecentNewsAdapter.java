@@ -50,6 +50,7 @@ public class RecentNewsAdapter extends RecyclerView.Adapter<RecentNewsAdapter.Vi
             bundle.putString("newsGenre", news.getGenre());
             bundle.putString("newsSynopsis", news.getSynopsis());
             bundle.putString("newsImage", news.getImageResource());
+            bundle.putFloat("newsRating", news.getRating());
             bundle.putString("dataType", "news");
             
             Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_navigation_detail, bundle);

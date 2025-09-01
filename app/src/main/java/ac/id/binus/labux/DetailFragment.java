@@ -85,6 +85,7 @@ public class DetailFragment extends Fragment {
                 String newsGenre = getArguments().getString("newsGenre");
                 String newsSynopsis = getArguments().getString("newsSynopsis");
                 String newsImage = getArguments().getString("newsImage");
+                Float newsRating = getArguments().getFloat("newsRating");
                 
                 // Set the data to views
                 TextView titleView = view.findViewById(R.id.titledets);
@@ -120,7 +121,10 @@ public class DetailFragment extends Fragment {
 
                 // Hide author and rating for news (not applicable)
                 if (authorView != null) authorView.setVisibility(View.GONE);
-                if (ratingView != null) ratingView.setVisibility(View.GONE);
+
+                String displayRating = (newsRating > 0) ? "★ " + newsRating
+                        : "No rating available";
+                if (ratingView != null) ratingView.setText(displayRating);
 
             } else if ("anime".equals(dataType)) {
                 // Handle anime data
@@ -203,7 +207,7 @@ public class DetailFragment extends Fragment {
                 if (titleView != null) titleView.setText(displayTitle);
 
                 // Set subtitle as genre info
-                String displayGenre = (reviewSubtitle != null && !reviewSubtitle.isEmpty()) ? reviewSubtitle : "Review";
+                String displayGenre = (reviewSubtitle != null && !reviewSubtitle.isEmpty()) ? reviewSubtitle : "Dark Action Masterpiece";
                 if (genreView != null) genreView.setText(displayGenre);
 
                 // Set description with fallback
@@ -223,7 +227,7 @@ public class DetailFragment extends Fragment {
 
                 // Show rating if available, hide if not
                 if (reviewRating > 0) {
-                    String stars = "★".repeat(reviewRating) + "☆".repeat(5 - reviewRating);
+                    String stars = "★ " + reviewRating;
                     if (ratingView != null) {
                         ratingView.setText(stars);
                         ratingView.setVisibility(View.VISIBLE);
